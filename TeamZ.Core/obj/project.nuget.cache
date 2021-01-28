@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "NYb1A+46/GB79vDSIvmBb23WORRo2qVnvys3ysSEVg8OgJGhSahDsSjUzI3hrdjPgHxW4FVj1JMBBWR9da5MEw==",
+  "success": true,
+  "projectFilePath": "D:\\Source\\Repos\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Core\\TeamZ.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ammon\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\ammon\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
