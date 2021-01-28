@@ -1,4 +1,6 @@
-﻿# Team Zealzamorphe of the Holiest Order, Lords of the Western Territories Group Project
+Basic Markdown Syntax - https://www.markdownguide.org/basic-syntax/
+
+# Team Zealzamorphe of the Holiest Order, Lords of the Western Territories Group Project
  
 - Use Dockerfile to initialize db
 - Models for goods
