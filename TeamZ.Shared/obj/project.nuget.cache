@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "XulL7FTPK0BG8KbOO4bip2Wm+VxQuRNdxKh2OZD+PqWEEdTZioA7xexlUgg1m4m0UI3iOpVkAM3UJI65rXAKUQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\clbmr\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

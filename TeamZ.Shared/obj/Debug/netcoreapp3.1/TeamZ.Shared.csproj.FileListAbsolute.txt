@@ -1,0 +1,9 @@
+C:\Users\clbmr\School\teamz\TeamZ.Shared\bin\Debug\netcoreapp3.1\TeamZ.Shared.deps.json
+C:\Users\clbmr\School\teamz\TeamZ.Shared\bin\Debug\netcoreapp3.1\TeamZ.Shared.dll
+C:\Users\clbmr\School\teamz\TeamZ.Shared\bin\Debug\netcoreapp3.1\TeamZ.Shared.pdb
+C:\Users\clbmr\School\teamz\TeamZ.Shared\obj\Debug\netcoreapp3.1\TeamZ.Shared.csprojAssemblyReference.cache
+C:\Users\clbmr\School\teamz\TeamZ.Shared\obj\Debug\netcoreapp3.1\TeamZ.Shared.AssemblyInfoInputs.cache
+C:\Users\clbmr\School\teamz\TeamZ.Shared\obj\Debug\netcoreapp3.1\TeamZ.Shared.AssemblyInfo.cs
+C:\Users\clbmr\School\teamz\TeamZ.Shared\obj\Debug\netcoreapp3.1\TeamZ.Shared.csproj.CoreCompileInputs.cache
+C:\Users\clbmr\School\teamz\TeamZ.Shared\obj\Debug\netcoreapp3.1\TeamZ.Shared.dll
+C:\Users\clbmr\School\teamz\TeamZ.Shared\obj\Debug\netcoreapp3.1\TeamZ.Shared.pdb
