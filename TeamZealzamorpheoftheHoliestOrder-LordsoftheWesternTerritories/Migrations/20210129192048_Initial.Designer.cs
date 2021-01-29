@@ -9,8 +9,8 @@ using TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Services;
 namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20210129004858_pizza")]
-    partial class pizza
+    [Migration("20210129192048_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

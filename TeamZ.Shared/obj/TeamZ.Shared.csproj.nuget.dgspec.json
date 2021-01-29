@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj": {}
+    "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj": {
+    "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj",
         "projectName": "TeamZ.Shared",
-        "projectPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj",
-        "packagesPath": "C:\\Users\\clbmr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\obj\\",
+        "projectPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj",
+        "packagesPath": "C:\\Users\\ammon.zerkle\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\clbmr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ammon.zerkle\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -44,6 +44,12 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
             "System.ComponentModel.Annotations": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -64,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

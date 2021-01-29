@@ -1127,23 +1127,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\clbmr\\.nuget\\packages\\": {},
+    "C:\\Users\\ammon.zerkle\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\clbmr\\School\\teamz\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj",
+      "projectUniqueName": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj",
       "projectName": "TeamZ",
-      "projectPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj",
-      "packagesPath": "C:\\Users\\clbmr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\obj\\",
+      "projectPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj",
+      "packagesPath": "C:\\Users\\ammon.zerkle\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\clbmr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ammon.zerkle\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -1158,8 +1158,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj": {
-              "projectPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj"
+            "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj": {
+              "projectPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj"
             }
           }
         }
@@ -1221,7 +1221,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
