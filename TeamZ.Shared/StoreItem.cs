@@ -8,6 +8,7 @@ namespace TeamZ.Shared
         public int Id { get; set; }
         public string ItemName { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
         public List<Category> Categories { get; set; }
     }
 }
