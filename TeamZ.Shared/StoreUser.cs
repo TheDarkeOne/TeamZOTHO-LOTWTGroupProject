@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TeamZ.Shared
 {
-    public class Users
+    public class StoreUser
     {
         private ReadOnce readOnce = new ReadOnce();
 

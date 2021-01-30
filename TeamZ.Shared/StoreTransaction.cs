@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TeamZ.Shared
 {
-    public record Transaction
+    public record StoreTransaction
     {
         public int Id { get; set; }
         public int Quantity { get; init; }
