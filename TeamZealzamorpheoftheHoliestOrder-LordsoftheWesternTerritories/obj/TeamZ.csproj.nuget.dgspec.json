@@ -1,36 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj": {}
+    "C:\\Users\\clbmr\\School\\teamz\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj": {
+    "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj",
         "projectName": "TeamZ.Shared",
-        "projectPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj",
-        "packagesPath": "C:\\Users\\ammon.zerkle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\obj\\",
+        "projectPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj",
+        "packagesPath": "C:\\Users\\clbmr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\ammon.zerkle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\clbmr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -41,8 +41,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -70,24 +70,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj": {
+    "C:\\Users\\clbmr\\School\\teamz\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj",
+        "projectUniqueName": "C:\\Users\\clbmr\\School\\teamz\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj",
         "projectName": "TeamZ",
-        "projectPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj",
-        "packagesPath": "C:\\Users\\ammon.zerkle\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\obj\\",
+        "projectPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\TeamZ.csproj",
+        "packagesPath": "C:\\Users\\clbmr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\ammon.zerkle\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\clbmr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -102,8 +102,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj": {
-                "projectPath": "C:\\Users\\ammon.zerkle\\Repos\\src\\TeamZOTHO-LOTWTGroupProject\\TeamZ.Shared\\TeamZ.Shared.csproj"
+              "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj": {
+                "projectPath": "C:\\Users\\clbmr\\School\\teamz\\TeamZ.Shared\\TeamZ.Shared.csproj"
               }
             }
           }
@@ -165,7 +165,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
