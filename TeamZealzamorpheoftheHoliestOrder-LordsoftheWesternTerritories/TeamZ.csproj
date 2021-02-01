@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories</RootNamespace>
     <UserSecretsId>3d170649-0433-45ad-99ae-139e59eb243e</UserSecretsId>
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>

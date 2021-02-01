@@ -59,7 +59,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories v1"));
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
