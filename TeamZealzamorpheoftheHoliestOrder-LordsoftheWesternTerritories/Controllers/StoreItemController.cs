@@ -69,6 +69,23 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         }
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ConstructACroc(string color, string hobby, string hat="", string tail="", string heldItem="")
+        {
+            StoreItem item = new StoreItem($"{hobby} Croc", (decimal)49.99);
+            item.Description = new DescriptionBuilderService(color, hobby).WithFancyTail(tail).WithHat(hat).WithHeldItem(heldItem).Build();
+            if (validateClass.ValidateStoreItem(item))
+            {
+                await dataService.CreateItem(item);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("[action]")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateItem(StoreItem item)
         {
             if (validateClass.ValidateStoreItem(item))

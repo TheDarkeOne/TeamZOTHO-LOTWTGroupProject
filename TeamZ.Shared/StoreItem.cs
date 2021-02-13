@@ -10,5 +10,11 @@ namespace TeamZ.Shared
         public decimal Price { get; set; }
         public string Description { get; set; }
         public List<Category> Categories { get; set; }
+
+        public StoreItem (string itemName, decimal price)
+        {
+            this.ItemName = itemName;
+            this.Price = price;
+        }
     }
 }

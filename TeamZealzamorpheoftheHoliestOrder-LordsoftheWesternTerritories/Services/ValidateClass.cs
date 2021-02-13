@@ -9,7 +9,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 {
     public class ValidateClass
     {
-        public Regex RegexItem = new Regex("^[a-zA-Z0-9' ]*$");
+        public Regex RegexItem = new Regex("^[a-zA-Z0-9'. ]*$");
         public const int TITLE_SIZE = 50;
         public const int DESCRIPTION_SIZE = 200;
 
