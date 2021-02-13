@@ -16,9 +16,11 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
     {
 
         private readonly IDataService dataService;
-        public StoreItemController(IDataService dataService)
+        private readonly ValidateClass validateClass;
+        public StoreItemController(IDataService dataService, ValidateClass validateClass)
         {
             this.dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
+            this.validateClass = validateClass ?? throw new ArgumentNullException(nameof(validateClass));
         }
 
         [HttpGet("[action]")]
@@ -39,24 +41,59 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         }
 
         [HttpPost("[action]")]
-        public async Task AddCategory(Category category)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddCategory(Category category)
         {
-            await dataService.CreateCategory(category);
+            if (validateClass.ValidateCategory(category))
+            {
+                await dataService.CreateCategory(category);
+                return Ok();
+            } else
+            {
+                return BadRequest();
+            }
         }
         [HttpPost("[action]")]
-        public async Task AddItem(StoreItem item)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddItem(StoreItem item)
         {
-            await dataService.CreateItem(item);
+            if (validateClass.ValidateStoreItem(item))
+            {
+                await dataService.CreateItem(item);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
         [HttpPost("[action]")]
-        public async Task UpdateItem(StoreItem item)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateItem(StoreItem item)
         {
-            await dataService.UpdateItem(item);
+            if (validateClass.ValidateStoreItem(item))
+            {
+                await dataService.UpdateItem(item);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
         [HttpPost("[action]")]
-        public async Task UpdateCategory(Category category)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateCategory(Category category)
         {
-            await dataService.UpdateCategory(category);
+            if (validateClass.ValidateCategory(category))
+            {
+                await dataService.UpdateCategory(category);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
         [HttpPost("[action]")]
         public async Task DeleteItem(StoreItem item)
