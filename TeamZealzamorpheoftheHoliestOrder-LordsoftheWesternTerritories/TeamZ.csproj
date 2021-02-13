@@ -27,8 +27,4 @@
     <ProjectReference Include="..\TeamZ.Shared\TeamZ.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

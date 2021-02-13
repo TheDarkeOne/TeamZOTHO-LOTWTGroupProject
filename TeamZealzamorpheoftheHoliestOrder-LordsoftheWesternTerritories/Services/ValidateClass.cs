@@ -52,5 +52,14 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
             }
             return true;
         }
+
+        public bool ValidateTransactionQuantity(int quantity)
+        {
+            if ((quantity < 1) || (quantity > 500))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

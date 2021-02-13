@@ -31,6 +31,12 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
             await context.SaveChangesAsync();
         }
 
+        public async Task CreateTransaction(StoreTransaction storeTransaction)
+        {
+            context.Transactions.Add(storeTransaction);
+            await context.SaveChangesAsync();
+        }
+
         public async Task DeleteCategory(Category category)
         {
             context.Categories.Remove(category);
