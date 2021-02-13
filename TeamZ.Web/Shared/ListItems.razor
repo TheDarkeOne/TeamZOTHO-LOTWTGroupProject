@@ -1,0 +1,24 @@
+﻿@using TeamZ.Shared
+@inject APIService APIService
+
+<h3>Store Items</h3>
+
+<ul>
+    @foreach (var i in items)
+    {
+        <li>
+            @i.ItemName
+        </li>
+    }
+</ul>
+
+@code {    
+    public List<StoreItem> items { get; private set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = new List<StoreItem>();
+        items = await APIService.GetStoreItemsAsync();
+    }
+}

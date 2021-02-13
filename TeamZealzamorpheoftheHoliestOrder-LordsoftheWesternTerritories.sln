@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamZ", "TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories\TeamZ.csproj", "{02999E10-6C78-4CD2-AE12-D07B2883442E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamZ.Shared", "TeamZ.Shared\TeamZ.Shared.csproj", "{FE1C5655-E1CE-43A7-B4F4-1365F53F8C93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamZ.Shared", "TeamZ.Shared\TeamZ.Shared.csproj", "{FE1C5655-E1CE-43A7-B4F4-1365F53F8C93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamZ.Web", "TeamZ.Web\TeamZ.Web.csproj", "{03CCBA5A-9F38-4C63-8D5E-ED6DBCB7FCB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FE1C5655-E1CE-43A7-B4F4-1365F53F8C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE1C5655-E1CE-43A7-B4F4-1365F53F8C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE1C5655-E1CE-43A7-B4F4-1365F53F8C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03CCBA5A-9F38-4C63-8D5E-ED6DBCB7FCB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03CCBA5A-9F38-4C63-8D5E-ED6DBCB7FCB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03CCBA5A-9F38-4C63-8D5E-ED6DBCB7FCB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03CCBA5A-9F38-4C63-8D5E-ED6DBCB7FCB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
