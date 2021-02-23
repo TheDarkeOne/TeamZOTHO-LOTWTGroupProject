@@ -9,7 +9,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 {
     public class ValidateClass
     {
-        public Regex RegexItem = new Regex("^[a-zA-Z0-9'. ]*$");
+        public Regex RegexItem = new Regex("^[a-zA-Z0-9'., ]*$");
         public const int TITLE_SIZE = 50;
         public const int DESCRIPTION_SIZE = 200;
 
@@ -37,7 +37,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 
         public bool ValidateString(string field)
         {
-            if (RegexItem.IsMatch(field))
+            if (RegexItem.IsMatch(field) && field is not null)
             {
                 return true;
             }
@@ -46,7 +46,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 
         public bool ValidateStringSize(string field, int size)
         {
-            if (field.Length > size)
+            if (field.Length > size || field is null)
             {
                 return false;
             }
