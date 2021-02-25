@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Polly;
+using Polly.Extensions.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace TeamZ.Web
@@ -22,5 +25,7 @@ namespace TeamZ.Web
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        
     }
 }
