@@ -19,7 +19,6 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
         {
             this.Color = color;
             this.Hobby = hobby;
-
         }
 
         public DescriptionBuilderService WithHat(string hat)

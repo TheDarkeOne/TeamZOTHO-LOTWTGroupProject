@@ -14,8 +14,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        storeItem = new StoreItem("PlaceHolder", (decimal)0.00);
         var intID = int.Parse(id);
-        storeItem = apiService.GetStoreItemById(intID).Result;
+        storeItem = await apiService.GetStoreItemById(intID);
         Console.WriteLine(storeItem);
     }
 
