@@ -1,8 +1,30 @@
-﻿@page "/constructacroc"
+﻿@inject TeamZ.Web.APIService apiService
+@page "/constructacroc"
 
 <h3>Construct-a-Croc</h3>
 <h4>Coming Soon!</h4>
 
-@code {
+<EditForm OnValidSubmit="@Submit">
+    <h3>Construct-a-Croc</h3>
 
+    <InputText  id="color" @bind-Value="color" />
+    <InputText id="color" @bind-Value="hobby" />
+
+    <InputText id="color" @bind-Value="hat" />
+    <InputText id="color" @bind-Value="tail" />
+    <InputText id="color" @bind-Value="heldItem" />
+
+
+</EditForm>
+@code {
+    private string color { get; set; }
+    private string hat { get; set; }
+    private string hobby { get; set; }
+    private string tail { get; set; }
+    private string heldItem { get; set; }
+
+    private async void Submit()
+    {
+        await apiService.PostConstructACrocAsync(color, hobby, hat, tail, heldItem);
+    }
 }

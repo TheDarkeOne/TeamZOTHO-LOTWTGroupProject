@@ -21,5 +21,19 @@ namespace TeamZ.Web
             return await client.GetFromJsonAsync<List<StoreItem>>("api/storeitem/getitems");
         }
 
+        public async Task PostConstructACrocAsync(string color, string hobby, string hat = "", string tail = "", string heldItem = "")
+        {
+            var croc = new
+            {
+                Color = color,
+                Hobby = hobby,
+                Hat = hat,
+                Tail = tail,
+                HeldItem = heldItem,
+            };
+
+            await client.PostAsJsonAsync("api/storeitem/constructacroc", croc);
+        }
+
     }
 }
