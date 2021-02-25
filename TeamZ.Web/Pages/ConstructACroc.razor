@@ -1,4 +1,6 @@
 ﻿@inject TeamZ.Web.APIService apiService
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavManager
 @using TeamZ.Web.FormModels
 @page "/constructacroc"
 
@@ -41,12 +43,19 @@
     
     <button type="submit">Construct My Croc</button>
 </EditForm>
+
+
+
 @code {
     private CrocModel crocModel = new CrocModel();
 
 
     private async void Submit()
     {
-        await apiService.PostConstructACrocAsync(crocModel.Color, crocModel.Hobby, crocModel.Hat, crocModel.Tail, crocModel.HeldItem);
+        if(await JSRuntime.InvokeAsync<bool>("confirm", "Are you ready to complete your Croc?"))
+        {
+            await apiService.PostConstructACrocAsync(crocModel.Color, crocModel.Hobby, crocModel.Hat, crocModel.Tail, crocModel.HeldItem);
+            NavManager.NavigateTo("/");
+        }
     }
 }
