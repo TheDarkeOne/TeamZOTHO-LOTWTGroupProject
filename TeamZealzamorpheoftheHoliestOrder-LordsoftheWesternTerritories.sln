@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamZ.Shared", "TeamZ.Share
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamZ.Web", "TeamZ.Web\TeamZ.Web.csproj", "{03CCBA5A-9F38-4C63-8D5E-ED6DBCB7FCB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamZ.Test", "TeamZ.Test\TeamZ.Test.csproj", "{0B1280CA-1B90-4D68-9F5C-D469336861BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamZ.Test", "TeamZ.Test\TeamZ.Test.csproj", "{0B1280CA-1B90-4D68-9F5C-D469336861BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,23 @@
+﻿@page "/detail/{id}"
+@using TeamZ.Shared
+@inject APIService apiService
+ 
+<h3>ItemDetail</h3>
+
+<p>@storeItem.ItemName</p>
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+
+    private StoreItem storeItem { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var intID = int.Parse(id);
+        storeItem = apiService.GetStoreItemById(intID).Result;
+        Console.WriteLine(storeItem);
+    }
+
+
+}

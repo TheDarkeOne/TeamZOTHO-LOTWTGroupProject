@@ -35,5 +35,10 @@ namespace TeamZ.Web
             await client.PostAsJsonAsync("api/storeitem/constructacroc", croc);
         }
 
+        public async Task<StoreItem> GetStoreItemById(int id)
+        {
+            return await client.GetFromJsonAsync<StoreItem>($"api/storeitem/getitembyid/?id={id}");
+        }
+
     }
 }

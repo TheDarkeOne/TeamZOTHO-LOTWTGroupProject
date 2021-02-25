@@ -10,24 +10,24 @@ namespace TeamZ.Web.FormModels
     {
         [Required]
         [StringLength(15, ErrorMessage = "Color too long.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Characters are not allowed.")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Characters are not allowed.")]
         public string Color { get; set; }
 
         [Required]
         [StringLength(20, ErrorMessage = "Hobby too long.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Characters are not allowed.")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Characters are not allowed.")]
         public string Hobby { get; set; }
 
         [StringLength(20, ErrorMessage = "Hat too long.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Characters are not allowed.")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Characters are not allowed.")]
         public string Hat { get; set; }
 
         [StringLength(20, ErrorMessage = "Tail too long.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Characters are not allowed.")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Characters are not allowed.")]
         public string Tail { get; set; }
 
         [StringLength(20, ErrorMessage = "Held Item too long.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Characters are not allowed.")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Characters are not allowed.")]
         public string HeldItem { get; set; }
     }
 }

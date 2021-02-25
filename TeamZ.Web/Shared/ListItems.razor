@@ -3,6 +3,18 @@
 
 <h3>Store Items</h3>
 
+@foreach(var i in items)
+{
+    <div class="card">
+        <p class="card-header">
+            <a href="/detail/@i.Id">@i.ItemName</a>
+        </p>
+        <div class="card-body">
+            <p>@i.Description</p>
+        </div>
+    </div>
+}
+
 <ul>
     @foreach (var i in items)
     {
