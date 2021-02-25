@@ -15,15 +15,6 @@
     </div>
 }
 
-<ul>
-    @foreach (var i in items)
-    {
-        <li>
-            @i.ItemName
-        </li>
-    }
-</ul>
-
 @code {    
     public List<StoreItem> items { get; private set; }
 
