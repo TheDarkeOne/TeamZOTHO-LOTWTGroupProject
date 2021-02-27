@@ -55,7 +55,6 @@ namespace TeamZ.Web
             {
                 return Result.Fail<StoreItem>("Error while getting Store Item:" + e.Message);
             }
-            //return await client.GetFromJsonAsync<StoreItem>($"api/storeitem/getitembyid/?id={id}");
         }
 
     }
