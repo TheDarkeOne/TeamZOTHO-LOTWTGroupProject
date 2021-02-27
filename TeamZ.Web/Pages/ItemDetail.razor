@@ -1,7 +1,8 @@
-﻿@page "/detail/{id}"
+﻿@page "/detail/{id:int}"
 @using TeamZ.Shared
 @inject APIService apiService
- 
+@inject NavigationManager NavManager
+
 <h2>@storeItem.ItemName</h2>
 <h4>$@storeItem.Price USD</h4>
 
@@ -9,24 +10,20 @@
 
 @code {
     [Parameter]
-    public string id { get; set; }
+    public int id { get; set; }
 
     private StoreItem storeItem { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         storeItem = new StoreItem("", (decimal)0.00);
-        var intID = int.Parse(id);
-        try
+
+        var item = await apiService.GetStoreItemById(id);
+        storeItem = item.Success ? item.Value : null;
+
+        if (storeItem is null)
         {
-            var item = await apiService.GetStoreItemById(intID);
-            storeItem = item.Value;
-        } catch (Exception e)
-        {
-            storeItem = new StoreItem("PlaceHolder", (decimal)0.00);
+            NavManager.NavigateTo("/notfound");
         }
-        Console.WriteLine(storeItem);
     }
-
-
 }
