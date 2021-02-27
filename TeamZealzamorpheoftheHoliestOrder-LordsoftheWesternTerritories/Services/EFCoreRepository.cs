@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,46 +20,106 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 
         public IQueryable<Category> Categories => context.Categories;
 
-        public async Task CreateCategory(Category category)
+        public async Task<string> CreateCategory(Category category)
         {
-            context.Categories.Add(category);
-            await context.SaveChangesAsync();
+            try
+            {
+                context.Categories.Add(category);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
+
         }
 
-        public async Task CreateItem(StoreItem item)
+        public async Task<string> CreateItem(StoreItem item)
         {
-            context.StoreItems.Add(item);
-            await context.SaveChangesAsync();
+            try
+            {
+                context.StoreItems.Add(item);
+                await context.SaveChangesAsync();
+                return "";
+            } catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
         }
 
-        public async Task CreateTransaction(StoreTransaction storeTransaction)
+        public async Task<string> CreateTransaction(StoreTransaction storeTransaction)
         {
-            context.Transactions.Add(storeTransaction);
-            await context.SaveChangesAsync();
+            try
+            {
+                context.Transactions.Add(storeTransaction);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
         }
 
-        public async Task DeleteCategory(Category category)
+        public async Task<string> DeleteCategory(Category category)
         {
-            context.Categories.Remove(category);
-            await context.SaveChangesAsync();
+            try
+            {
+                context.Categories.Remove(category);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
+
         }
 
-        public async Task DeleteItem(StoreItem item)
+        public async Task<string> DeleteItem(StoreItem item)
         {
-            context.StoreItems.Remove(item);
-            await context.SaveChangesAsync();
+            try
+             {
+                context.StoreItems.Remove(item);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
+
         }
 
-        public async Task UpdateCategory(Category category)
+        public async Task<string> UpdateCategory(Category category)
         {
-            context.Categories.Update(category);
-            await context.SaveChangesAsync();
+            try
+            {
+                context.Categories.Update(category);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
+
         }
 
-        public async Task UpdateItem(StoreItem item)
+        public async Task<string> UpdateItem(StoreItem item)
         {
-            context.StoreItems.Update(item);
-            await context.SaveChangesAsync();
+            try
+            {
+                context.StoreItems.Update(item);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
+
         }
     }
 }
