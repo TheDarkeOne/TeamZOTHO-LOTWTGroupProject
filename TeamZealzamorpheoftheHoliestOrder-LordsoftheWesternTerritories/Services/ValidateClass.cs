@@ -46,7 +46,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 
         public bool ValidateStringSize(string field, int size)
         {
-            if (field.Length > size || field is null)
+            if (field.Length > size || field is null || field.Length < 1)
             {
                 return false;
             }
