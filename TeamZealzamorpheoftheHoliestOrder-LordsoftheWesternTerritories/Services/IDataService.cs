@@ -8,14 +8,14 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 {
     public interface IDataService
     {
-        Task CreateItem(StoreItem item);
-        Task CreateCategory(Category category);
+        Task<string> CreateItem(StoreItem item);
+        Task<string> CreateCategory(Category category);
         Task CreateTransaction(StoreTransaction transaction);
         IQueryable<StoreItem> Items { get; }
         IQueryable<Category> Categories { get; }
-        Task UpdateItem(StoreItem item);
-        Task UpdateCategory(Category category);
-        Task DeleteItem(StoreItem item);
-        Task DeleteCategory(Category category);
+        Task<string> UpdateItem(StoreItem item);
+        Task<string> UpdateCategory(Category category);
+        Task<string> DeleteItem(StoreItem item);
+        Task<string> DeleteCategory(Category category);
     }
 }
