@@ -2,9 +2,10 @@
 @using TeamZ.Shared
 @inject APIService apiService
  
-<h3>ItemDetail</h3>
+<h2>@storeItem.ItemName</h2>
+<h4>$@storeItem.Price USD</h4>
 
-<p>@storeItem.ItemName</p>
+<p>@storeItem.Description</p>
 
 @code {
     [Parameter]
@@ -18,7 +19,8 @@
         var intID = int.Parse(id);
         try
         {
-            storeItem = await apiService.GetStoreItemById(intID);
+            var item = await apiService.GetStoreItemById(intID);
+            storeItem = item.Value;
         } catch (Exception e)
         {
             storeItem = new StoreItem("PlaceHolder", (decimal)0.00);

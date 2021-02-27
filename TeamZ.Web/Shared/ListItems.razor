@@ -3,7 +3,7 @@
 
 <h3>Store Items</h3>
 
-@foreach(var i in items)
+@foreach(var i in storeItems)
 {
     <div class="card">
         <p class="card-header">
@@ -16,12 +16,12 @@
 }
 
 @code {    
-    public List<StoreItem> items { get; private set; }
-
+    public List<StoreItem> storeItems { get; private set; }
 
     protected override async Task OnInitializedAsync()
     {
-        items = new List<StoreItem>();
-        items = await APIService.GetStoreItemsAsync();
+        storeItems = new List<StoreItem>();
+        var items = await APIService.GetStoreItemsAsync();
+        storeItems = items.Value;
     }
 }
