@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamZ.Web", "TeamZ.Web\Team
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamZ.Test", "TeamZ.Test\TeamZ.Test.csproj", "{0B1280CA-1B90-4D68-9F5C-D469336861BB}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2CB97CBE-5E79-4452-8A8A-D07BB1EFEDED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0B1280CA-1B90-4D68-9F5C-D469336861BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B1280CA-1B90-4D68-9F5C-D469336861BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B1280CA-1B90-4D68-9F5C-D469336861BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB97CBE-5E79-4452-8A8A-D07BB1EFEDED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB97CBE-5E79-4452-8A8A-D07BB1EFEDED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB97CBE-5E79-4452-8A8A-D07BB1EFEDED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB97CBE-5E79-4452-8A8A-D07BB1EFEDED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  database:
+    image: postgres
+    container_name: database
+    environment: 
+      - POSTGRES_USER=teamz
+      - POSTGRES_PASSWORD=teamz
+      - POSTGRES_DB=admin
+      - PGPASSFILE=blank
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports: 
+      - 5432:5432
+    expose:
+      - 5432
+
+  teamz:
+    image: ${DOCKER_REGISTRY-}teamz
+    build:
+      context: .
+      dockerfile: TeamZealzamorpheoftheHoliestOrder-LordsoftheWesternTerritories/Dockerfile
+    ports:
+      - 8080:80
+    environment:
+      - DATABASE_URL=host=database;port=5432;database=admin;username=teamz;password=teamz
+    depends_on: 
+      - database
+
+  teamz.web:
+    image: ${DOCKER_REGISTRY-}teamzweb
+    build:
+      context: .
+      dockerfile: TeamZ.Web/Dockerfile
+    ports:
+      - 5000:80
+    environment:
+      - HttpClientBaseAddress=http://teamz
+
+volumes:
+  pg-data:

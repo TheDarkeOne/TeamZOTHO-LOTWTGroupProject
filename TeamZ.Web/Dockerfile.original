@@ -8,7 +8,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["TeamZ.Web/TeamZ.Web.csproj", "TeamZ.Web/"]
-COPY ["TeamZ.Shared/TeamZ.Shared.csproj", "TeamZ.Shared/"]
 RUN dotnet restore "TeamZ.Web/TeamZ.Web.csproj"
 COPY . .
 WORKDIR "/src/TeamZ.Web"
