@@ -9,18 +9,19 @@ namespace TeamZ.Shared
         private ReadOnce readOnce = new ReadOnce();
 
         public int Id { get; set; }
+        public bool Admin { get; set; } = false;
         public string Username { get; set; }
         public string Password
         {
             get { return readOnce.Value; }
             set { readOnce.Value = value; }
         }
+        public byte[] Salt { get; set; }
     }
-
 
     public class ReadOnce
     {
-        private bool set;
+        //private bool set;
         private string value;
 
         public String Value
@@ -28,8 +29,8 @@ namespace TeamZ.Shared
             get { return value; }
             set
             {
-                if (set) throw new AlreadySetException(value);
-                set = true;
+                //if (set) throw new AlreadySetException(value);
+                //set = true;
                 this.value = value;
             }
         }
