@@ -16,7 +16,7 @@ namespace TeamZ.Shared
             get { return readOnce.Value; }
             set { readOnce.Value = value; }
         }
-        public byte[] Salt { get; set; }
+        public string Salt { get; set; }
     }
 
     public class ReadOnce
