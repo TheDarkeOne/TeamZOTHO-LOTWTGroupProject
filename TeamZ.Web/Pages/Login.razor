@@ -1,0 +1,31 @@
+﻿@inject TeamZ.Web.APIService apiService
+@using TeamZ.Web.FormModels
+@page "/login"
+
+<h1>Login</h1>
+
+<EditForm Model="@loginModel" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator />
+    <label>
+        Username:
+    </label>
+    <p>
+        <InputText id="username" @bind-Value="loginModel.Username" />
+    </p>
+    <label>
+        Password:
+    </label>
+    <p>
+        <InputText type="password" id="password" @bind-Value="loginModel.Password" />
+    </p>
+</EditForm>
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+
+    private async void Submit()
+    {
+        
+    }
+
+}
