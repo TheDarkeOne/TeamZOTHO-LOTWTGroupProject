@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Services
 {
-    public class SaltAndHashService
+    public class LoginService
     {
         public Tuple<string, string> SaltAndHash(string password, string saltString = null)
         {
@@ -33,6 +33,16 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
                 iterationCount: 10000,
                 numBytesRequested: 256 / 8));
             return Tuple.Create(hashed, savedSalt);
+        }
+
+        public string GenerateSessionKey()
+        {
+            const string pool = "abcdefghijklmnopqrstuvwxyz0123456789!?#$%@*&";
+            Random rng = new Random();
+
+            var chars = Enumerable.Range(0, 32)
+                .Select(x => pool[rng.Next(0, pool.Length)]);
+            return new string(chars.ToArray());
         }
     }
 }

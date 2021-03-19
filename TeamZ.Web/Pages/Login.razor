@@ -1,4 +1,6 @@
 ﻿@inject TeamZ.Web.APIService apiService
+@*@inject TeamZ.Web.SessionService sessionService*@
+@inject NavigationManager NavManager
 @using TeamZ.Web.FormModels
 @page "/login"
 
@@ -18,14 +20,32 @@
     <p>
         <InputText type="password" id="password" @bind-Value="loginModel.Password" />
     </p>
+    <button type="submit">Login</button>
 </EditForm>
+@if (loginFailed)
+{
+    <p style="color: red">Unable to Authenticate</p>
+}
 
 @code {
     private LoginModel loginModel = new LoginModel();
+    private bool loginFailed = false;
 
     private async void Submit()
     {
-        
-    }
+        try
+        {
+            loginFailed = await apiService.PostLoginAsync(loginModel.Username, loginModel.Password);
+        }
+        catch (Exception e)
+        {
+            loginFailed = true;
+            Console.WriteLine("Error:", e);
+        }
 
+        if (!loginFailed)
+        {
+            NavManager.NavigateTo("/");
+        }
+    }
 }

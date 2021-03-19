@@ -14,4 +14,11 @@ namespace TeamZ.Shared
         public string Tail { get; set; } = "";
         public string HeldItem { get; set; } = "";
     }
+
+    public class LoginAttributes
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public DateTime LoginTime { get; set; }
+    }
 }

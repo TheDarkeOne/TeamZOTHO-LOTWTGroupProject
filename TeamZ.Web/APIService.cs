@@ -57,5 +57,16 @@ namespace TeamZ.Web
             }
         }
 
+        public async Task<bool> PostLoginAsync(string user, string pass)
+        {
+            var credentials = new
+            {
+                Username = user,
+                Password = pass,
+                LoginTime = DateTime.Now,
+            };
+            var result = await client.PostAsJsonAsync("api/user/loginasuser", credentials);
+            return result.IsSuccessStatusCode;
+        }
     }
 }

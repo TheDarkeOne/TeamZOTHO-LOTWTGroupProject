@@ -17,6 +17,8 @@ namespace TeamZ.Shared
             set { readOnce.Value = value; }
         }
         public string Salt { get; set; }
+        public string SessionKey { get; set; }
+        public DateTime LastLoginTime { get; set; }
     }
 
     public class ReadOnce

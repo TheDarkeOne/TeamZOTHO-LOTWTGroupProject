@@ -134,7 +134,20 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
             {
                 return "Something went wrong when processing your request";
             }
+        }
 
+        public async Task<string> UpdateStoreUser(StoreUser user)
+        {
+            try
+            {
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
         }
     }
 }

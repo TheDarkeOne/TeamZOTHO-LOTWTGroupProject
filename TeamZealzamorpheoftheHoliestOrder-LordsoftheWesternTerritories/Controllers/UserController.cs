@@ -16,12 +16,12 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
     {
         private readonly IDataService dataService;
         private readonly ValidateClass validateClass;
-        private readonly SaltAndHashService saltAndHashService;
-        public UserController(IDataService dataService, ValidateClass validateClass, SaltAndHashService saltAndHashService)
+        private readonly LoginService loginService;
+        public UserController(IDataService dataService, ValidateClass validateClass, LoginService loginService)
         {
             this.dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             this.validateClass = validateClass ?? throw new ArgumentNullException(nameof(validateClass));
-            this.saltAndHashService = saltAndHashService ?? throw new ArgumentNullException(nameof(saltAndHashService));
+            this.loginService = loginService ?? throw new ArgumentNullException(nameof(loginService));
         }
 
         [HttpPost("[action]")]
@@ -33,7 +33,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         {
             if (validateClass.ValidateUsername(user.Username))
             {
-                (user.Password, user.Salt) = saltAndHashService.SaltAndHash(user.Password);
+                (user.Password, user.Salt) = loginService.SaltAndHash(user.Password);
                 await dataService.CreateStoreUser(user);
                 return Ok();
             }
@@ -42,15 +42,23 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
 
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult LogInAsUser(string username, string password)
+        public async Task<IActionResult> LogInAsUser(LoginAttributes login)
         {
-            if (dataService.StoreUsers.Any(u => u.Username == username)) 
+            if (dataService.StoreUsers.Any(u => u.Username == login.Username)) 
             {
-                StoreUser user = dataService.StoreUsers.Where(u => u.Username == username).FirstOrDefault();
+                StoreUser user = dataService.StoreUsers.Where(u => u.Username == login.Username).FirstOrDefault();
                 string hashedPass;
-                (hashedPass, _) = saltAndHashService.SaltAndHash(password, user.Salt);
+                (hashedPass, _) = loginService.SaltAndHash(login.Password, user.Salt);
                 if (hashedPass == user.Password)
                 {
+                    user.LastLoginTime = login.LoginTime;
+                    string key = loginService.GenerateSessionKey();
+                    while (dataService.StoreUsers.Any(u => u.SessionKey == key))
+                    {
+                        key = loginService.GenerateSessionKey();
+                    }
+                    user.SessionKey = key;
+                    await dataService.UpdateStoreUser(user);
                     return Ok();
                 }
             }

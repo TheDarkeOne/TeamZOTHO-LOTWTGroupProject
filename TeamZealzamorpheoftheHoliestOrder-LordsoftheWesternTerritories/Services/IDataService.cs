@@ -17,6 +17,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
         IQueryable<StoreUser> StoreUsers { get; }
         Task<string> UpdateItem(StoreItem item);
         Task<string> UpdateCategory(Category category);
+        Task<string> UpdateStoreUser(StoreUser user);
         Task<string> DeleteItem(StoreItem item);
         Task<string> DeleteCategory(Category category);
     }
