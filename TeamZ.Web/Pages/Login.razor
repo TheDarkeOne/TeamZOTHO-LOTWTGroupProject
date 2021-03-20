@@ -28,6 +28,10 @@
     <p style="color: red">Unable to Authenticate</p>
 }
 
+<p>@session.LoggedInUser</p>
+<p>@session.SessionKey</p>
+<p>@session.IsAdmin</p>
+
 @code {
     private LoginModel loginModel = new LoginModel();
     private bool loginSuccess = true;
@@ -43,7 +47,8 @@
         {
             string sessionKey;
             (loginSuccess, sessionKey) = await apiService.PostLoginAsync(loginModel.Username, loginModel.Password);
-            session.LoginUser(loginModel.Username, sessionKey);
+            bool admin = await apiService.PostCheckAdminStatus(loginModel.Username, sessionKey);
+            session.LoginUser(loginModel.Username, sessionKey, admin);
         }
         catch (Exception e)
         {

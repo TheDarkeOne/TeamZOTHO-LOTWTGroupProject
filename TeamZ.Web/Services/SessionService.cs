@@ -14,16 +14,18 @@ namespace TeamZ.Web
         public string LoggedInUser { get; private set; } = null;
         public string SessionKey { get; private set; } = null;
         public DateTime LoginTime { get; private set; }
+        public bool IsAdmin { get; private set; } = false;
 
         public event Action OnChange;
 
         private void NotifyStateChanged() => OnChange?.Invoke();
 
-        public void LoginUser(string username, string newKey)
+        public void LoginUser(string username, string newKey, bool admin)
         {
             LoggedInUser = username;
             SessionKey = newKey;
             LoginTime = DateTime.Now;
+            IsAdmin = admin;
             NotifyStateChanged();
         }
 

@@ -80,5 +80,16 @@ namespace TeamZ.Web
             };
             await client.PostAsJsonAsync("api/user/logoutuser", credentials);
         }
+
+        public async Task<bool> PostCheckAdminStatus(string user, string key)
+        {
+            var credentials = new
+            {
+                Username = user,
+                SessionKey = key,
+            };
+            var result = await client.PostAsJsonAsync("api/user/checkadminstatus", credentials);
+            return result.IsSuccessStatusCode;
+        }
     }
 }

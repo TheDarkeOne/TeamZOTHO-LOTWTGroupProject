@@ -83,6 +83,21 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         }
 
         [HttpPost("[action]")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CheckAdminStatus(LoginAttributes status)
+        {
+            if (dataService.StoreUsers.Any(u => u.Username == status.Username))
+            {
+                StoreUser user = dataService.StoreUsers.Where(u => u.Username == status.Username).FirstOrDefault();
+                if (user.Admin)
+                {
+                    return Ok();
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("[action]")]
         public async Task<IActionResult> CreateTransaction(int itemId, int quantity)
         {
             if (validateClass.ValidateTransactionQuantity(quantity))
