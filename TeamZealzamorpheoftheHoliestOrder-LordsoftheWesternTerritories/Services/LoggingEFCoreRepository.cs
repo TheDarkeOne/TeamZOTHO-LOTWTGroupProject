@@ -33,7 +33,6 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
             }
             catch (DbUpdateException e)
             {
-                context.LogMessages.Add(new LogMessage { Level = "Error", Service = "IDataService", Parameters = category.Title, TimeStamp = DateTime.Now, Action = "DbUpdateException: " + e.ToString() });
                 return "Something went wrong when processing your request";
             }
 
@@ -49,7 +48,6 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
                 return "";
             } catch (DbUpdateException e)
             {
-                context.LogMessages.Add(new LogMessage { Level = "Error", Service = "IDataService", Parameters = item.ItemName, TimeStamp = DateTime.Now, Action = "DbUpdateException: " + e.ToString() });
                 return "Something went wrong when processing your request";
             }
         }
@@ -131,6 +129,20 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
                 return "Something went wrong when processing your request";
             }
 
+        }
+
+        public async Task<string> LogMessage(LogMessage message)
+        {
+            try
+            {
+                context.LogMessages.Add(message);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
         }
     }
 }
