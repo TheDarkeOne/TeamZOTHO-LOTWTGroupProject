@@ -80,5 +80,28 @@ namespace TeamZ.Web
             };
             await client.PostAsJsonAsync("api/user/logoutuser", credentials);
         }
+
+        public async Task<bool> PostCreateUserAsync(string user, string pass)
+        {
+            var newUser = new
+            {
+                Username = user,
+                Password = pass
+            };
+            var result = await client.PostAsJsonAsync("api/user/createuser", newUser);
+            return result.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> PostCreateItemAsync(string name, decimal price, string description)
+        {
+            var newItem = new 
+            {
+                ItemName = name,
+                Price = price,
+                Description = description
+            };
+            var result = await client.PostAsJsonAsync("api/storeitem/additem", newItem);
+            return result.IsSuccessStatusCode;
+        }
     }
 }

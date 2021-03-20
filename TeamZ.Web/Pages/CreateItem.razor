@@ -1,7 +1,7 @@
 ﻿@inject TeamZ.Web.APIService apiService
 @inject NavigationManager NavManager
 @using TeamZ.Web.FormModels
-@page "/createuser"
+@page "/createstoreitem"
 
 <h1>Add Item To Store</h1>
 
@@ -17,7 +17,7 @@
         Price:
     </label>
     <p>
-        <InputText type="" id="price" @bind-Value="itemModel.Price" />
+        <InputNumber TValue="decimal" id="price" @bind-Value="itemModel.Price" />
     </p>
     <label>
         Description:
@@ -40,7 +40,7 @@
     {
         try
         {
-            createFailed = await apiService.PostLoginAsync(userModel.Username, userModel.Password);
+            createFailed = await apiService.PostCreateItemAsync(itemModel.ItemName, itemModel.Price, itemModel.Description);
         }
         catch (Exception e)
         {

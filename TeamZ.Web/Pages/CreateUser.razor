@@ -3,7 +3,7 @@
 @using TeamZ.Web.FormModels
 @page "/createuser"
 
-<h1>Add User</h1>
+<h1>Register User</h1>
 
 <EditForm Model="@userModel" OnValidSubmit="@Submit">
     <DataAnnotationsValidator />
@@ -21,28 +21,28 @@
     </p>
     <button type="submit">Create User</button>
 </EditForm>
-@if (createFailed)
+@if (!createSucceeded)
 {
     <p style="color: red">A problem happened when creating the user</p>
 }
 
 @code {
     private UserModel userModel = new UserModel();
-    private bool createFailed = false;
+    private bool createSucceeded = true;
 
     private async void Submit()
     {
         try
         {
-            createFailed = await apiService.PostLoginAsync(userModel.Username, userModel.Password);
+            createSucceeded = await apiService.PostCreateUserAsync(userModel.Username, userModel.Password);
         }
         catch (Exception e)
         {
-            createFailed = true;
+            createSucceeded = false;
             Console.WriteLine("Error:", e);
         }
 
-        if (!createFailed)
+        if (createSucceeded)
         {
             NavManager.NavigateTo("/");
         }
