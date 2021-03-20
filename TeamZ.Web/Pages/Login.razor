@@ -7,30 +7,34 @@
 
 <h1>Login</h1>
 
-<EditForm Model="@loginModel" OnValidSubmit="@Submit">
-    <DataAnnotationsValidator />
-    <label>
-        Username:
-    </label>
-    <p>
-        <InputText id="username" @bind-Value="loginModel.Username" />
-    </p>
-    <label>
-        Password:
-    </label>
-    <p>
-        <InputText type="password" id="password" @bind-Value="loginModel.Password" />
-    </p>
-    <button type="submit">Login</button>
-</EditForm>
-@if (!loginSuccess)
+@if (session.LoggedInUser is null)
 {
-    <p style="color: red">Unable to Authenticate</p>
+    <EditForm Model="@loginModel" OnValidSubmit="@Submit">
+        <DataAnnotationsValidator />
+        <label>
+            Username:
+        </label>
+        <p>
+            <InputText id="username" @bind-Value="loginModel.Username" />
+        </p>
+        <label>
+            Password:
+        </label>
+        <p>
+            <InputText type="password" id="password" @bind-Value="loginModel.Password" />
+        </p>
+        <button type="submit">Login</button>
+    </EditForm>
+    @if (!loginSuccess)
+    {
+        <p style="color: red">Unable to Authenticate</p>
+    }
+} else
+{
+    <p>You are already logged in as @session.LoggedInUser</p>
+    <p>You have been logged in for @session.CheckTimeLoggedOn() minutes</p>
 }
 
-<p>@session.LoggedInUser</p>
-<p>@session.SessionKey</p>
-<p>@session.IsAdmin</p>
 
 @code {
     private LoginModel loginModel = new LoginModel();
