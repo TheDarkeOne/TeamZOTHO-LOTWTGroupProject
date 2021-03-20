@@ -12,6 +12,7 @@ namespace TeamZ.Web
     public class APIService
     {
         private readonly HttpClient client;
+        private readonly SessionService session = new SessionService();
         public APIService(HttpClient client)
         {
             this.client = client;
@@ -57,5 +58,27 @@ namespace TeamZ.Web
             }
         }
 
+        public async Task<Tuple<bool, string>> PostLoginAsync(string user, string pass)
+        {
+            var credentials = new
+            {
+                Username = user,
+                Password = pass,
+                LoginTime = DateTime.Now,
+                SessionKey = session.GenerateSessionKey(),
+            };
+            var result = await client.PostAsJsonAsync("api/user/loginasuser", credentials);
+            return Tuple.Create(result.IsSuccessStatusCode, credentials.SessionKey);
+        }
+
+        public async Task PostLogOut(string user, string key)
+        {
+            var credentials = new
+            {
+                Username = user,
+                SessionKey = key,
+            };
+            await client.PostAsJsonAsync("api/user/logoutuser", credentials);
+        }
     }
 }

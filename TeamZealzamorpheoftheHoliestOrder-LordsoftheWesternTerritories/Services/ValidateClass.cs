@@ -10,6 +10,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
     public class ValidateClass
     {
         public Regex RegexItem = new Regex("^[a-zA-Z0-9'., ]*$");
+        public Regex RegexUsername = new Regex("^[a-zA-Z0-9_@.$]*$");
         public const int TITLE_SIZE = 50;
         public const int DESCRIPTION_SIZE = 200;
 
@@ -60,6 +61,16 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
                 return false;
             }
             return true;
+        }
+
+        public bool ValidateUsername(string username)
+        {
+            if (RegexUsername.IsMatch(username) && username is not null && 
+                username.Length < 15 && username.Length > 5)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

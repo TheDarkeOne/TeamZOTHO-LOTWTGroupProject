@@ -20,6 +20,8 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 
         public IQueryable<Category> Categories => context.Categories;
 
+        public IQueryable<StoreUser> StoreUsers => context.Users;
+
         public async Task<string> CreateCategory(Category category)
         {
             try
@@ -40,6 +42,19 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
             try
             {
                 context.StoreItems.Add(item);
+                await context.SaveChangesAsync();
+                return "";
+            } catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
+        }
+
+        public async Task<string> CreateStoreUser(StoreUser user)
+        {
+            try
+            {
+                context.Users.Add(user);
                 await context.SaveChangesAsync();
                 return "";
             } catch (DbUpdateException e)
@@ -119,7 +134,20 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
             {
                 return "Something went wrong when processing your request";
             }
+        }
 
+        public async Task<string> UpdateStoreUser(StoreUser user)
+        {
+            try
+            {
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+                return "";
+            }
+            catch (DbUpdateException e)
+            {
+                return "Something went wrong when processing your request";
+            }
         }
     }
 }
