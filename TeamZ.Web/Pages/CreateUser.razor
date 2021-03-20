@@ -1,0 +1,51 @@
+﻿@inject TeamZ.Web.APIService apiService
+@inject NavigationManager NavManager
+@using TeamZ.Web.FormModels
+@page "/createuser"
+
+<h1>Add User</h1>
+
+<EditForm Model="@userModel" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator />
+    <label>
+        Username:
+    </label>
+    <p>
+        <InputText id="username" @bind-Value="userModel.Username" />
+    </p>
+    <label>
+        Password:
+    </label>
+    <p>
+        <InputText type="password" id="password" @bind-Value="userModel.Password" />
+    </p>
+    <button type="submit">Create User</button>
+</EditForm>
+@if (createFailed)
+{
+    <p style="color: red">A problem happened when creating the user</p>
+}
+
+@code {
+    private UserModel userModel = new UserModel();
+    private bool createFailed = false;
+
+    private async void Submit()
+    {
+        try
+        {
+            createFailed = await apiService.PostLoginAsync(userModel.Username, userModel.Password);
+        }
+        catch (Exception e)
+        {
+            createFailed = true;
+            Console.WriteLine("Error:", e);
+        }
+
+        if (!createFailed)
+        {
+            NavManager.NavigateTo("/");
+        }
+    }
+}
+
