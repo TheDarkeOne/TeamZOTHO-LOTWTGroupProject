@@ -19,6 +19,12 @@ namespace TeamZ.Shared
         public string Salt { get; set; }
         public string SessionKey { get; set; }
         public DateTime LastLoginTime { get; set; }
+
+        public StoreUser(bool admin, string username)
+        {
+            this.Admin = admin;
+            this.Username = username;
+        }
     }
 
     public class ReadOnce

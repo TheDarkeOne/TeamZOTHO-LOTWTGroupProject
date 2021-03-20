@@ -46,6 +46,22 @@ namespace TeamZ.Web
             await client.PostAsJsonAsync("api/storeitem/constructacroc", croc);
         }
 
+        public async Task PostAddItemAsync(string user, string key, bool admin, string name, decimal price, string description)
+        {
+            var item = new
+            {
+                Username = user,
+                SessionKey = key,
+                Name = name,
+                Price = price,
+                Description = description,
+            };
+            if (admin)
+            {
+                await client.PostAsJsonAsync("api/storeitem/additem", item);
+            }
+        }
+
         public async Task<Result<StoreItem>> GetStoreItemById(int id)
         {
             try
