@@ -43,7 +43,6 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
             try
             {
                 context.StoreItems.Add(item);
-                context.LogMessages.Add(new LogMessage { Level = "Info", Service = "IDataService", Parameters = item.ItemName, TimeStamp = DateTime.Now, Action = "CreateItem" });
                 await context.SaveChangesAsync();
                 return "";
             } catch (DbUpdateException e)
@@ -131,17 +130,17 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
 
         }
 
-        public async Task<string> LogMessage(LogMessage message)
+        public async Task<bool> LogMessage(LogMessage message)
         {
             try
             {
                 context.LogMessages.Add(message);
                 await context.SaveChangesAsync();
-                return "";
+                return true;
             }
             catch (DbUpdateException e)
             {
-                return "Something went wrong when processing your request";
+                return false;
             }
         }
     }

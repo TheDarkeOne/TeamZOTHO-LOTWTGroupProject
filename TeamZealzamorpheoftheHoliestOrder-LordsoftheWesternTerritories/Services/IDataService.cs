@@ -18,5 +18,6 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
         Task<string> UpdateCategory(Category category);
         Task<string> DeleteItem(StoreItem item);
         Task<string> DeleteCategory(Category category);
+        Task<bool> LogMessage(LogMessage message);
     }
 }
