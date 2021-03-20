@@ -34,6 +34,7 @@ namespace TeamZ.Web
             services.AddHttpClient<APIService>(hc => hc.BaseAddress = new Uri(baseAddress))
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5))
                 .AddPolicyHandler(GetRetryPolicy());
+            services.AddScoped<SessionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,6 +12,7 @@ namespace TeamZ.Web
     public class APIService
     {
         private readonly HttpClient client;
+        private readonly SessionService session = new SessionService();
         public APIService(HttpClient client)
         {
             this.client = client;
@@ -45,6 +46,22 @@ namespace TeamZ.Web
             await client.PostAsJsonAsync("api/storeitem/constructacroc", croc);
         }
 
+        public async Task PostAddItemAsync(string user, string key, bool admin, string name, decimal price, string description)
+        {
+            var item = new
+            {
+                Username = user,
+                SessionKey = key,
+                Name = name,
+                Price = price,
+                Description = description,
+            };
+            if (admin)
+            {
+                await client.PostAsJsonAsync("api/storeitem/additem", item);
+            }
+        }
+
         public async Task<Result<StoreItem>> GetStoreItemById(int id)
         {
             try
@@ -57,5 +74,38 @@ namespace TeamZ.Web
             }
         }
 
+        public async Task<Tuple<bool, string>> PostLoginAsync(string user, string pass)
+        {
+            var credentials = new
+            {
+                Username = user,
+                Password = pass,
+                LoginTime = DateTime.Now,
+                SessionKey = session.GenerateSessionKey(),
+            };
+            var result = await client.PostAsJsonAsync("api/user/loginasuser", credentials);
+            return Tuple.Create(result.IsSuccessStatusCode, credentials.SessionKey);
+        }
+
+        public async Task PostLogOut(string user, string key)
+        {
+            var credentials = new
+            {
+                Username = user,
+                SessionKey = key,
+            };
+            await client.PostAsJsonAsync("api/user/logoutuser", credentials);
+        }
+
+        public async Task<bool> PostCheckAdminStatus(string user, string key)
+        {
+            var credentials = new
+            {
+                Username = user,
+                SessionKey = key,
+            };
+            var result = await client.PostAsJsonAsync("api/user/checkadminstatus", credentials);
+            return result.IsSuccessStatusCode;
+        }
     }
 }

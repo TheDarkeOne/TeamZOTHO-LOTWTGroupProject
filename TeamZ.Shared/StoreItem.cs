@@ -11,10 +11,11 @@ namespace TeamZ.Shared
         public string Description { get; set; }
         public List<Category> Categories { get; set; }
 
-        public StoreItem (string itemName, decimal price)
+        public StoreItem (string itemName, decimal price, string description = null)
         {
             this.ItemName = itemName;
             this.Price = price;
+            this.Description = description;
         }
     }
 }

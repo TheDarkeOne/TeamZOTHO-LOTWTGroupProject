@@ -1,0 +1,70 @@
+﻿@inject TeamZ.Web.APIService apiService
+@inject NavigationManager NavManager
+@inject SessionService session
+@implements IDisposable
+@using TeamZ.Web.FormModels
+@page "/login"
+
+<h1>Login</h1>
+
+<EditForm Model="@loginModel" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator />
+    <label>
+        Username:
+    </label>
+    <p>
+        <InputText id="username" @bind-Value="loginModel.Username" />
+    </p>
+    <label>
+        Password:
+    </label>
+    <p>
+        <InputText type="password" id="password" @bind-Value="loginModel.Password" />
+    </p>
+    <button type="submit">Login</button>
+</EditForm>
+@if (!loginSuccess)
+{
+    <p style="color: red">Unable to Authenticate</p>
+}
+
+<p>@session.LoggedInUser</p>
+<p>@session.SessionKey</p>
+<p>@session.IsAdmin</p>
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+    private bool loginSuccess = true;
+
+    protected override void OnInitialized()
+    {
+        session.OnChange += StateHasChanged;
+    }
+
+    private async void Submit()
+    {
+        try
+        {
+            string sessionKey;
+            (loginSuccess, sessionKey) = await apiService.PostLoginAsync(loginModel.Username, loginModel.Password);
+            bool admin = await apiService.PostCheckAdminStatus(loginModel.Username, sessionKey);
+            session.LoginUser(loginModel.Username, sessionKey, admin);
+        }
+        catch (Exception e)
+        {
+            loginSuccess = true;
+            Console.WriteLine("Error:", e);
+        }
+
+        if (loginSuccess)
+        {
+            NavManager.NavigateTo("/");
+        }
+    }
+
+    public void Dispose()
+    {
+        session.OnChange -= StateHasChanged;
+    }
+
+}
