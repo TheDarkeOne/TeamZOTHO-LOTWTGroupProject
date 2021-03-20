@@ -15,10 +15,12 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
         IQueryable<StoreItem> Items { get; }
         IQueryable<Category> Categories { get; }
         IQueryable<StoreUser> StoreUsers { get; }
+        IQueryable<LogMessage> LogMessages { get; }
         Task<string> UpdateItem(StoreItem item);
         Task<string> UpdateCategory(Category category);
         Task<string> UpdateStoreUser(StoreUser user);
         Task<string> DeleteItem(StoreItem item);
         Task<string> DeleteCategory(Category category);
+        Task<bool> LogMessage(LogMessage message);
     }
 }

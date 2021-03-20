@@ -36,7 +36,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories
             });
             services.AddControllers();
             services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql(convertUrlConnectionString(Configuration["DATABASE_URL"])));
-            services.AddTransient<IDataService, EFCoreRepository>();
+            services.AddScoped<IDataService, LoggingEFCoreRepository>();
             services.AddTransient<ValidateClass>();
             services.AddTransient<LoginService>();
             services.AddCors(options =>

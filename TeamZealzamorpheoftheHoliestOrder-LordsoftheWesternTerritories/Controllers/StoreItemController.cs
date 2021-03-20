@@ -27,6 +27,8 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         public async Task<List<StoreItem>> GetItems() => await dataService.Items.ToListAsync();
         [HttpGet("[action]")]
         public async Task<List<Category>> GetCategories() => await dataService.Categories.ToListAsync();
+        [HttpGet("[action]")]
+        public async Task<List<LogMessage>> GetLogMessages() => await dataService.LogMessages.ToListAsync();
 
         [HttpGet("[action]")]
         public async Task<StoreItem> GetItemById(int id) 
@@ -37,59 +39,90 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         [HttpGet("[action]")]
         public async Task<Category> GetCategoryById(int id)
         {
-            return await dataService.Categories.Where(i => i.Id == id).FirstOrDefaultAsync();
+            var logged = await TryLogMessage("IDataService", "Info", id.ToString(), "GetCategoryById");
+            if (logged)
+            {
+                return await dataService.Categories.Where(i => i.Id == id).FirstOrDefaultAsync();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddCategory(Category category)
         {
-            if (validateClass.ValidateCategory(category))
+            var logged = await TryLogMessage("IDataService", "Info", category.Title, "AddCategory");
+            if (logged)
             {
-                await dataService.CreateCategory(category);
-                return Ok();
-            } else
+                if (validateClass.ValidateCategory(category))
+                {
+                    await dataService.CreateCategory(category);
+                    return Ok();
+                } else
+                {
+                    return BadRequest();
+                }
+            }
+            else
             {
                 return BadRequest();
             }
         }
+
+
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddItem(AddObjectAttributes newItem)
         {
-            if (dataService.StoreUsers.Any(u => u.Username == newItem.Username))
+            var logged = await TryLogMessage("IDataService", "Info", newItem.Name, "AddItem");
+            if (logged)
             {
-                StoreUser user = dataService.StoreUsers.Where(u => u.Username == newItem.Username).FirstOrDefault();
-                if (newItem.SessionKey == user.SessionKey)
+                if (dataService.StoreUsers.Any(u => u.Username == newItem.Username))
                 {
-                    if (user.Admin)
+                    StoreUser user = dataService.StoreUsers.Where(u => u.Username == newItem.Username).FirstOrDefault();
+                    if (newItem.SessionKey == user.SessionKey)
                     {
-                        StoreItem item = new StoreItem(newItem.Name, newItem.Price, newItem.Description);
-                        if (validateClass.ValidateStoreItem(item))
+                        if (user.Admin)
                         {
-                            await dataService.CreateItem(item);
-                            return Ok();
+                            StoreItem item = new StoreItem(newItem.Name, newItem.Price, newItem.Description);
+                            if (validateClass.ValidateStoreItem(item))
+                            {
+                                await dataService.CreateItem(item);
+                                return Ok();
+                            }
                         }
                     }
                 }
             }
             return BadRequest();
         }
+
+
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ConstructACroc(CrocAttributes crocAttributes)
         {
             StoreItem item = new StoreItem($"{crocAttributes.Hobby} Croc", (decimal)49.99);
-            item.Description = new DescriptionBuilderService(
-                crocAttributes.Color, 
-                crocAttributes.Hobby)
+            item.Description = new DescriptionBuilderService(crocAttributes.Color, crocAttributes.Hobby)
                 .WithFancyTail(crocAttributes.Tail)
                 .WithHat(crocAttributes.Hat)
-                .WithHeldItem(crocAttributes.HeldItem).Build();
-            if (validateClass.ValidateStoreItem(item))
+                .WithHeldItem(crocAttributes.HeldItem)
+                .Build();
+            var logged = await TryLogMessage("IDataService", "Info", item.ItemName, "ConstructACroc");
+            if (logged)
             {
-                await dataService.CreateItem(item);
-                return Ok();
+                if (validateClass.ValidateStoreItem(item))
+                {
+                    await dataService.CreateItem(item);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             else
             {
@@ -115,10 +148,18 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateCategory(Category category)
         {
-            if (validateClass.ValidateCategory(category))
+            var logged = await TryLogMessage("IDataService", "Info", category.Title, "UpdateCategory");
+            if (logged)
             {
-                await dataService.UpdateCategory(category);
-                return Ok();
+                if (validateClass.ValidateCategory(category))
+                {
+                    await dataService.UpdateCategory(category);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             else
             {
@@ -128,13 +169,25 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         [HttpPost("[action]")]
         public async Task DeleteItem(StoreItem item)
         {
-            await dataService.DeleteItem(item);
+            var logged = await TryLogMessage("IDataService", "Info", item.ItemName, "DeleteItem");
+            if (logged)
+            {
+                await dataService.DeleteItem(item);
+            }
         }
 
         [HttpPost("[action]")]
         public async Task DeleteCategory(Category category)
         {
-            await dataService.DeleteCategory(category);
+            var logged = await TryLogMessage("IDataService", "Info", category.Title, "DeleteCategory");
+            if (logged)
+            {
+                await dataService.DeleteCategory(category);
+            }
+        }
+        private async Task<bool> TryLogMessage(string service, string level, string parameters, string action)
+        {
+            return await dataService.LogMessage(new LogMessage { Service = service, Action = action, Parameters = parameters, Level = level, TimeStamp = DateTime.Now });
         }
     }
 }
