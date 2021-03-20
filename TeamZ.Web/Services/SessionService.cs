@@ -37,7 +37,7 @@ namespace TeamZ.Web
 
         public double CheckTimeLoggedOn()
         {
-            TimeSpan timeLoggedOn = LoginTime - DateTime.Now;
+            TimeSpan timeLoggedOn = DateTime.Now - LoginTime;
             return timeLoggedOn.TotalMinutes;
         }
 
