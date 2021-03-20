@@ -23,14 +23,22 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateTransaction(int itemId, int quantity)
         {
-            if (validateClass.ValidateTransactionQuantity(quantity))
+            var logged = await TryLogMessage("IDataService", "Info", "Transaction: " + itemId.ToString(), "CreateTransaction");
+            if (logged)
             {
-                var item = dataService.Items.Where(i => i.Id == itemId).FirstOrDefault();
-                if (item is not null)
+                if (validateClass.ValidateTransactionQuantity(quantity))
                 {
-                    StoreTransaction storeTransaction = new StoreTransaction() { Quantity = quantity, Item = item };
-                    await dataService.CreateTransaction(storeTransaction);
-                    return Ok();
+                    var item = dataService.Items.Where(i => i.Id == itemId).FirstOrDefault();
+                    if (item is not null)
+                    {
+                        StoreTransaction storeTransaction = new StoreTransaction() { Quantity = quantity, Item = item };
+                        await dataService.CreateTransaction(storeTransaction);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
                 }
                 else
                 {
@@ -41,6 +49,11 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
             {
                 return BadRequest();
             }
+        }
+
+        private async Task<bool> TryLogMessage(string service, string level, string parameters, string action)
+        {
+            return await dataService.LogMessage(new LogMessage { Service = service, Action = action, Parameters = parameters, Level = level, TimeStamp = DateTime.Now });
         }
     }
 }
