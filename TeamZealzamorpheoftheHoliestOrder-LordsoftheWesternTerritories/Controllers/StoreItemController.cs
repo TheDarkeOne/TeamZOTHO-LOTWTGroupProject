@@ -71,47 +71,33 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
                 return BadRequest();
             }
         }
+
+
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddItem(AddObjectAttributes newItem)
         {
-            if (dataService.StoreUsers.Any(u => u.Username == newItem.Username))
+            var logged = await TryLogMessage("IDataService", "Info", newItem.Name, "AddItem");
+            if (logged)
             {
-                StoreUser user = dataService.StoreUsers.Where(u => u.Username == newItem.Username).FirstOrDefault();
-                if (newItem.SessionKey == user.SessionKey)
+                if (dataService.StoreUsers.Any(u => u.Username == newItem.Username))
                 {
-                    if (user.Admin)
+                    StoreUser user = dataService.StoreUsers.Where(u => u.Username == newItem.Username).FirstOrDefault();
+                    if (newItem.SessionKey == user.SessionKey)
                     {
-                        StoreItem item = new StoreItem(newItem.Name, newItem.Price, newItem.Description);
-                        if (validateClass.ValidateStoreItem(item))
+                        if (user.Admin)
                         {
-                            await dataService.CreateItem(item);
-                            return Ok();
+                            StoreItem item = new StoreItem(newItem.Name, newItem.Price, newItem.Description);
+                            if (validateClass.ValidateStoreItem(item))
+                            {
+                                await dataService.CreateItem(item);
+                                return Ok();
+                            }
                         }
                     }
                 }
             }
             return BadRequest();
-        }
-        public async Task<IActionResult> AddItem(StoreItem item)
-        {
-            var logged = await TryLogMessage("IDataService", "Info", item.ItemName, "AddItem");
-            if (logged)
-            {
-                if (validateClass.ValidateStoreItem(item))
-                {
-                    await dataService.CreateItem(item);
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            else
-            {
-                return BadRequest();
-            }
         }
 
 
@@ -120,7 +106,11 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         public async Task<IActionResult> ConstructACroc(CrocAttributes crocAttributes)
         {
             StoreItem item = new StoreItem($"{crocAttributes.Hobby} Croc", (decimal)49.99);
-            item.Description = new DescriptionBuilderService(crocAttributes.Color, crocAttributes.Hobby).WithFancyTail(crocAttributes.Tail).WithHat(crocAttributes.Hat).WithHeldItem(crocAttributes.HeldItem).Build();
+            item.Description = new DescriptionBuilderService(crocAttributes.Color, crocAttributes.Hobby)
+                .WithFancyTail(crocAttributes.Tail)
+                .WithHat(crocAttributes.Hat)
+                .WithHeldItem(crocAttributes.HeldItem)
+                .Build();
             var logged = await TryLogMessage("IDataService", "Info", item.ItemName, "ConstructACroc");
             if (logged)
             {
