@@ -46,7 +46,7 @@ namespace TeamZ.Web
             await client.PostAsJsonAsync("api/storeitem/constructacroc", croc);
         }
 
-        public async Task PostAddItemAsync(string user, string key, bool admin, string name, decimal price, string description)
+        public async Task PostAddItemAsync(string user, string key, string name, decimal price, string description, bool admin = false)
         {
             var item = new
             {
@@ -60,6 +60,19 @@ namespace TeamZ.Web
             {
                 await client.PostAsJsonAsync("api/storeitem/additem", item);
             }
+        }
+
+        public async Task PostCreateUserAsync(string user, string key, string newUser, string newPassword, bool admin = false)
+        {
+            var u = new
+            {
+                Username = user,
+                SessionKey = key,
+                Name = newUser,
+                Password = newPassword,
+                IsAdmin = admin,
+            };
+            await client.PostAsJsonAsync("api/user/createuser", u);
         }
 
         public async Task<Result<StoreItem>> GetStoreItemById(int id)
@@ -95,29 +108,6 @@ namespace TeamZ.Web
                 SessionKey = key,
             };
             await client.PostAsJsonAsync("api/user/logoutuser", credentials);
-        }
-
-        public async Task<bool> PostCreateUserAsync(string user, string pass)
-        {
-            var newUser = new
-            {
-                Username = user,
-                Password = pass
-            };
-            var result = await client.PostAsJsonAsync("api/user/createuser", newUser);
-            return result.IsSuccessStatusCode;
-        }
-
-        public async Task<bool> PostCreateItemAsync(string name, decimal price, string description)
-        {
-            var newItem = new 
-            {
-                ItemName = name,
-                Price = price,
-                Description = description
-            };
-            var result = await client.PostAsJsonAsync("api/storeitem/additem", newItem);
-            return result.IsSuccessStatusCode;
         }
 
         public async Task<bool> PostCheckAdminStatus(string user, string key)

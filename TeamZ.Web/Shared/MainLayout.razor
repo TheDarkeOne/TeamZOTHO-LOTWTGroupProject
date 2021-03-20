@@ -40,7 +40,7 @@
         {
             await apiService.PostLogOut(session.LoggedInUser, session.SessionKey);
             session.LogOutUser();
-            NavManager.NavigateTo("/");
+            NavManager.NavigateTo("/", forceLoad:true);
         }
         catch (Exception e)
         {

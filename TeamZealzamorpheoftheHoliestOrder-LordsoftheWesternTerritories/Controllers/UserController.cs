@@ -36,15 +36,16 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
                 StoreUser user = dataService.StoreUsers.Where(u => u.Username == newUser.Username).FirstOrDefault();
                 if (newUser.SessionKey == user.SessionKey)
                 {
-                    if (user.Admin)
+                    if (!user.Admin)
                     {
-                        StoreUser storeUser = new StoreUser(newUser.IsAdmin, newUser.Name);
-                        if (validateClass.ValidateUsername(storeUser.Username))
-                        {
-                            (storeUser.Password, storeUser.Salt) = loginService.SaltAndHash(newUser.Password);
-                            await dataService.CreateStoreUser(storeUser);
-                            return Ok();
-                        }
+                        newUser.IsAdmin = false;
+                    }
+                    StoreUser storeUser = new StoreUser(newUser.IsAdmin, newUser.Name);
+                    if (validateClass.ValidateUsername(storeUser.Username))
+                    {
+                        (storeUser.Password, storeUser.Salt) = loginService.SaltAndHash(newUser.Password);
+                        await dataService.CreateStoreUser(storeUser);
+                        return Ok();
                     }
                 }
             }

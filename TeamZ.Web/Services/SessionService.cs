@@ -33,6 +33,7 @@ namespace TeamZ.Web
         {
             LoggedInUser = null;
             SessionKey = null;
+            IsAdmin = false;
         }
 
         public double CheckTimeLoggedOn()

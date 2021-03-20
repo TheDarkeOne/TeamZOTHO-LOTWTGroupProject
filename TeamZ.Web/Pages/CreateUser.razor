@@ -1,5 +1,7 @@
 ﻿@inject TeamZ.Web.APIService apiService
 @inject NavigationManager NavManager
+@inject SessionService session
+@implements IDisposable
 @using TeamZ.Web.FormModels
 @page "/createuser"
 
@@ -19,6 +21,17 @@
     <p>
         <InputText type="password" id="password" @bind-Value="userModel.Password" />
     </p>
+    @if (session.IsAdmin)
+    {
+        <p>
+            <label>
+                Has Administrator privileges?
+                <InputCheckbox @bind-Value="userModel.IsAdmin" />
+            </label>
+        </p>
+        
+    }
+
     <button type="submit">Create User</button>
 </EditForm>
 @if (!createSucceeded)
@@ -30,11 +43,16 @@
     private UserModel userModel = new UserModel();
     private bool createSucceeded = true;
 
+    protected override void OnInitialized()
+    {
+        session.OnChange += StateHasChanged;
+    }
+
     private async void Submit()
     {
         try
         {
-            createSucceeded = await apiService.PostCreateUserAsync(userModel.Username, userModel.Password);
+            await apiService.PostCreateUserAsync(session.LoggedInUser, session.SessionKey, userModel.Username, userModel.Password, userModel.IsAdmin);
         }
         catch (Exception e)
         {
@@ -46,6 +64,11 @@
         {
             NavManager.NavigateTo("/");
         }
+    }
+
+    public void Dispose()
+    {
+        session.OnChange -= StateHasChanged;
     }
 }
 

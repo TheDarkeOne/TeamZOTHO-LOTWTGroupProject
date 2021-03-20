@@ -17,5 +17,7 @@ namespace TeamZ.Web.FormModels
         [StringLength(30, ErrorMessage = "Password is too long.")]
         [RegularExpression(@"^[a-zA-Z0-9@$!?]*$", ErrorMessage = "Contains characters not allowed.")]
         public string Password { get; set; }
+
+        public bool IsAdmin { get; set; } = false;
     }
 }
