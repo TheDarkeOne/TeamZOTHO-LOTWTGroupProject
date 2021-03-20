@@ -25,11 +25,11 @@
     <p>
         <InputText id="description" @bind-Value="itemModel.Description" />
     </p>
-    <button type="submit">Create User</button>
+    <button type="submit">Create Item</button>
 </EditForm>
 @if (createFailed)
 {
-    <p style="color: red">A problem happened when creating the user</p>
+    <p style="color: red">A problem happened when creating the item</p>
 }
 
 @code {
