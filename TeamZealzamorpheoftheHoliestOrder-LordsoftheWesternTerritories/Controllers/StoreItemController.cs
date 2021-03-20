@@ -27,6 +27,8 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         public async Task<List<StoreItem>> GetItems() => await dataService.Items.ToListAsync();
         [HttpGet("[action]")]
         public async Task<List<Category>> GetCategories() => await dataService.Categories.ToListAsync();
+        [HttpGet("[action]")]
+        public async Task<List<LogMessage>> GetLogMessages() => await dataService.LogMessages.ToListAsync();
 
         [HttpGet("[action]")]
         public async Task<StoreItem> GetItemById(int id) 

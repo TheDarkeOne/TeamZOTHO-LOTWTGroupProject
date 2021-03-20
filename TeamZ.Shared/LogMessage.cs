@@ -12,6 +12,7 @@ namespace TeamZ.Shared
         public string Service { get; set; }
         public DateTime TimeStamp { get; set; }
         public string Level { get; set; }
-        public string Output { get; set; }
+        public string Parameters { get; set; }
+        public string Action { get; set; }
     }
 }

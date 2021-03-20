@@ -13,6 +13,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
         Task<string> CreateTransaction(StoreTransaction transaction);
         IQueryable<StoreItem> Items { get; }
         IQueryable<Category> Categories { get; }
+        IQueryable<LogMessage> LogMessages { get; }
         Task<string> UpdateItem(StoreItem item);
         Task<string> UpdateCategory(Category category);
         Task<string> DeleteItem(StoreItem item);
