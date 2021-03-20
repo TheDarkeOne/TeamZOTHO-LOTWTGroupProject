@@ -46,6 +46,22 @@ namespace TeamZ.Web
             await client.PostAsJsonAsync("api/storeitem/constructacroc", croc);
         }
 
+        public async Task PostAddItemAsync(string user, string key, bool admin, string name, decimal price, string description)
+        {
+            var item = new
+            {
+                Username = user,
+                SessionKey = key,
+                Name = name,
+                Price = price,
+                Description = description,
+            };
+            if (admin)
+            {
+                await client.PostAsJsonAsync("api/storeitem/additem", item);
+            }
+        }
+
         public async Task<Result<StoreItem>> GetStoreItemById(int id)
         {
             try
@@ -101,6 +117,17 @@ namespace TeamZ.Web
                 Description = description
             };
             var result = await client.PostAsJsonAsync("api/storeitem/additem", newItem);
+            return result.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> PostCheckAdminStatus(string user, string key)
+        {
+            var credentials = new
+            {
+                Username = user,
+                SessionKey = key,
+            };
+            var result = await client.PostAsJsonAsync("api/user/checkadminstatus", credentials);
             return result.IsSuccessStatusCode;
         }
     }

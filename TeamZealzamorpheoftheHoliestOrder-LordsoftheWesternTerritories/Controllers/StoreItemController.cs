@@ -55,17 +55,25 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         }
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddItem(StoreItem item)
+        public async Task<IActionResult> AddItem(AddObjectAttributes newItem)
         {
-            if (validateClass.ValidateStoreItem(item))
+            if (dataService.StoreUsers.Any(u => u.Username == newItem.Username))
             {
-                await dataService.CreateItem(item);
-                return Ok();
+                StoreUser user = dataService.StoreUsers.Where(u => u.Username == newItem.Username).FirstOrDefault();
+                if (newItem.SessionKey == user.SessionKey)
+                {
+                    if (user.Admin)
+                    {
+                        StoreItem item = new StoreItem(newItem.Name, newItem.Price, newItem.Description);
+                        if (validateClass.ValidateStoreItem(item))
+                        {
+                            await dataService.CreateItem(item);
+                            return Ok();
+                        }
+                    }
+                }
             }
-            else
-            {
-                return BadRequest();
-            }
+            return BadRequest();
         }
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

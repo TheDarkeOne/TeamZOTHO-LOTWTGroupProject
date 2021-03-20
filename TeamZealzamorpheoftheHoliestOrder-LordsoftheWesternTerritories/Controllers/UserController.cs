@@ -29,13 +29,24 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
 
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateUser(StoreUser user)
+        public async Task<IActionResult> CreateUser(AddObjectAttributes newUser)
         {
-            if (validateClass.ValidateUsername(user.Username))
+            if (dataService.StoreUsers.Any(u => u.Username == newUser.Username))
             {
-                (user.Password, user.Salt) = loginService.SaltAndHash(user.Password);
-                await dataService.CreateStoreUser(user);
-                return Ok();
+                StoreUser user = dataService.StoreUsers.Where(u => u.Username == newUser.Username).FirstOrDefault();
+                if (newUser.SessionKey == user.SessionKey)
+                {
+                    if (user.Admin)
+                    {
+                        StoreUser storeUser = new StoreUser(newUser.IsAdmin, newUser.Name);
+                        if (validateClass.ValidateUsername(storeUser.Username))
+                        {
+                            (storeUser.Password, storeUser.Salt) = loginService.SaltAndHash(newUser.Password);
+                            await dataService.CreateStoreUser(storeUser);
+                            return Ok();
+                        }
+                    }
+                }
             }
             return BadRequest();
         }
@@ -76,6 +87,21 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
                     }
                     user.SessionKey = key;
                     await dataService.UpdateStoreUser(user);
+                    return Ok();
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("[action]")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CheckAdminStatus(LoginAttributes status)
+        {
+            if (dataService.StoreUsers.Any(u => u.Username == status.Username))
+            {
+                StoreUser user = dataService.StoreUsers.Where(u => u.Username == status.Username).FirstOrDefault();
+                if (user.Admin)
+                {
                     return Ok();
                 }
             }
