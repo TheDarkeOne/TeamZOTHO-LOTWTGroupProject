@@ -1,4 +1,8 @@
 ﻿@inherits LayoutComponentBase
+@inject TeamZ.Web.APIService apiService
+@inject SessionService session
+@inject NavigationManager NavManager
+@implements IDisposable
 
 <div class="page">
     <div class="sidebar">
@@ -7,7 +11,15 @@
 
     <div class="main">
         <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+            @if (session.LoggedInUser is not null)
+            {
+                <p>Logged in as @session.LoggedInUser</p>
+                <button class="btn-link" @onclick="Logout">Log Out</button>
+            }
+            else
+            {
+                <p>Not logged in</p>
+            }
         </div>
 
         <div class="content px-4">
@@ -17,5 +29,27 @@
 </div>
 
 @code {
+    protected override void OnInitialized()
+    {
+        session.OnChange += StateHasChanged;
+    }
 
+    private async void Logout()
+    {
+        try
+        {
+            await apiService.PostLogOut(session.LoggedInUser, session.SessionKey);
+            session.LogOutUser();
+            NavManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error:", e);
+        }
+    }
+
+    public void Dispose()
+    {
+        session.OnChange -= StateHasChanged;
+    }
 }

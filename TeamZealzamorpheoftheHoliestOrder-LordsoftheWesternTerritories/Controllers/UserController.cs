@@ -52,6 +52,23 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
                 if (hashedPass == user.Password)
                 {
                     user.LastLoginTime = login.LoginTime;
+                    user.SessionKey = login.SessionKey;
+                    await dataService.UpdateStoreUser(user);
+                    return Ok();
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("[action]")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> LogOutUser(LoginAttributes logout)
+        {
+            if (dataService.StoreUsers.Any(u => u.Username == logout.Username))
+            {
+                StoreUser user = dataService.StoreUsers.Where(u => u.Username == logout.Username).FirstOrDefault();
+                if (logout.SessionKey == user.SessionKey)
+                {
                     string key = loginService.GenerateSessionKey();
                     while (dataService.StoreUsers.Any(u => u.SessionKey == key))
                     {

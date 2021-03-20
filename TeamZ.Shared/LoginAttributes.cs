@@ -6,19 +6,11 @@ using System.Threading.Tasks;
 
 namespace TeamZ.Shared
 {
-    public class CrocAttributes
-    {
-        public string Color { get; set; }
-        public string Hobby { get; set; }
-        public string Hat { get; set; } = "";
-        public string Tail { get; set; } = "";
-        public string HeldItem { get; set; } = "";
-    }
-
     public class LoginAttributes
     {
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTime LoginTime { get; set; }
+        public string SessionKey { get; set; }
     }
 }

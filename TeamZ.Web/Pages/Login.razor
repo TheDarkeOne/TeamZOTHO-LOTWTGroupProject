@@ -1,6 +1,7 @@
 ﻿@inject TeamZ.Web.APIService apiService
-@*@inject TeamZ.Web.SessionService sessionService*@
 @inject NavigationManager NavManager
+@inject SessionService session
+@implements IDisposable
 @using TeamZ.Web.FormModels
 @page "/login"
 
@@ -22,30 +23,43 @@
     </p>
     <button type="submit">Login</button>
 </EditForm>
-@if (loginFailed)
+@if (!loginSuccess)
 {
     <p style="color: red">Unable to Authenticate</p>
 }
 
 @code {
     private LoginModel loginModel = new LoginModel();
-    private bool loginFailed = false;
+    private bool loginSuccess = true;
+
+    protected override void OnInitialized()
+    {
+        session.OnChange += StateHasChanged;
+    }
 
     private async void Submit()
     {
         try
         {
-            loginFailed = await apiService.PostLoginAsync(loginModel.Username, loginModel.Password);
+            string sessionKey;
+            (loginSuccess, sessionKey) = await apiService.PostLoginAsync(loginModel.Username, loginModel.Password);
+            session.LoginUser(loginModel.Username, sessionKey);
         }
         catch (Exception e)
         {
-            loginFailed = true;
+            loginSuccess = true;
             Console.WriteLine("Error:", e);
         }
 
-        if (!loginFailed)
+        if (loginSuccess)
         {
             NavManager.NavigateTo("/");
         }
     }
+
+    public void Dispose()
+    {
+        session.OnChange -= StateHasChanged;
+    }
+
 }
