@@ -51,24 +51,23 @@
         {
             string sessionKey;
             (loginSuccess, sessionKey) = await apiService.PostLoginAsync(loginModel.Username, loginModel.Password);
-            bool admin = await apiService.PostCheckAdminStatus(loginModel.Username, sessionKey);
-            session.LoginUser(loginModel.Username, sessionKey, admin);
+            if (loginSuccess)
+            {
+                bool admin = await apiService.PostCheckAdminStatus(loginModel.Username, sessionKey);
+                session.LoginUser(loginModel.Username, sessionKey, admin);
+                NavManager.NavigateTo("/");
+            }
         }
         catch (Exception e)
         {
-            loginSuccess = true;
+            loginSuccess = false;
             Console.WriteLine("Error:", e);
         }
-
-        if (loginSuccess)
-        {
-            NavManager.NavigateTo("/");
-        }
+        StateHasChanged();
     }
 
     public void Dispose()
     {
         session.OnChange -= StateHasChanged;
     }
-
 }
