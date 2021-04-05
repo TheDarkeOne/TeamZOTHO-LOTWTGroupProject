@@ -45,6 +45,19 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
             return false;
         }
 
+        public string ToSanitizedString(string field)
+        {
+            try
+            {
+                return Regex.Replace(field, @"^[<>/@%^{}()]", "",
+                    RegexOptions.None, TimeSpan.FromSeconds(1.5));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return String.Empty;
+            }
+        }
+
         public bool ValidateStringSize(string field, int size)
         {
             if (field.Length > size || field is null || field.Length < 1)
