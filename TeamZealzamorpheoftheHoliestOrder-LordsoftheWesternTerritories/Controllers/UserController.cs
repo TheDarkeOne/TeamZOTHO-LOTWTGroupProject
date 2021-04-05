@@ -31,25 +31,26 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateUser(AddObjectAttributes newUser)
         {
+            StoreUser creator = null;
             if (dataService.StoreUsers.Any(u => u.Username == newUser.Username))
             {
-                StoreUser user = dataService.StoreUsers.Where(u => u.Username == newUser.Username).FirstOrDefault();
-                if (newUser.SessionKey == user.SessionKey)
+                creator = dataService.StoreUsers.Where(u => u.Username == newUser.Username).FirstOrDefault();
+            }
+            if (newUser.SessionKey == creator?.SessionKey)
+            {
+                if (!creator?.Admin ?? false)
                 {
-                    if (!user.Admin)
-                    {
-                        newUser.IsAdmin = false;
-                    }
-                    StoreUser storeUser = new StoreUser(newUser.IsAdmin, newUser.Name);
-                    if (validateClass.ValidateUsername(storeUser.Username))
-                    {
-                        (storeUser.Password, storeUser.Salt) = loginService.SaltAndHash(newUser.Password);
-                        await dataService.CreateStoreUser(storeUser);
-                        return Ok();
-                    }
+                    newUser.IsAdmin = false;
+                }
+                StoreUser storeUser = new StoreUser(newUser.IsAdmin, newUser.Name);
+                if (validateClass.ValidateUsername(storeUser.Username))
+                {
+                    (storeUser.Password, storeUser.Salt) = loginService.SaltAndHash(newUser.Password);
+                    await dataService.CreateStoreUser(storeUser);
+                    return Ok();
                 }
             }
-            return BadRequest();
+        return BadRequest();
         }
 
         [HttpPost("[action]")]
