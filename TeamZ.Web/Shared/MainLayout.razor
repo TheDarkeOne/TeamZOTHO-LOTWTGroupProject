@@ -38,6 +38,7 @@
     {
         try
         {
+            await apiService.DeleteCartItems(session.SessionKey);
             await apiService.PostLogOut(session.LoggedInUser, session.SessionKey);
             session.LogOutUser();
             NavManager.NavigateTo("/", forceLoad:true);

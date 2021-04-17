@@ -11,6 +11,7 @@
 
 @if(session.LoggedInUser is not null)
 {
+    <input type="number" @bind="CartAmount"/>
     <button @onclick="addToCart">Add To Cart</button>
 }
 
@@ -20,10 +21,14 @@
 
     private StoreItem storeItem { get; set; }
 
+    public int CartAmount { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         session.OnChange += StateHasChanged;
         storeItem = new StoreItem("", (decimal)0.00);
+
+        CartAmount = 1;
 
         var item = await apiService.GetStoreItemById(id);
         storeItem = item.Success ? item.Value : null;
@@ -36,6 +41,7 @@
 
     private async void addToCart()
     {
-        await apiService.AddItemToCart(storeItem, session.SessionKey, 1);
+        await apiService.AddItemToCart(storeItem, session.SessionKey, CartAmount);
+        NavManager.NavigateTo("/");
     }
 }

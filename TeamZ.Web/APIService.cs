@@ -83,6 +83,11 @@ namespace TeamZ.Web
             await client.PostAsJsonAsync("api/Cart", cartItem);
         }
 
+        public async Task DeleteCartItems(string sessionKey)
+        {
+            await client.DeleteAsync($"api/Cart/DeleteCartItemBySession/{sessionKey}");
+        }
+
         public async Task<IEnumerable<CartItem>> GetCartItemAsync(string SessionKey)
         {
             var encodedSessionKey = HttpUtility.UrlEncode(SessionKey);

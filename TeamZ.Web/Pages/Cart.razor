@@ -1,12 +1,14 @@
 ﻿@page "/cart"
 @inject APIService apiService
 @inject SessionService session
+@inject NavigationManager NavManager
 @using TeamZ.Shared;
-@using System.Linq; 
+@using TeamZ.Web.FormModels;
+@using System.Linq;
 
 <h3>Cart</h3>
 
-@foreach(var i in StoreItems)
+@foreach (var i in StoreItems)
 {
     <p>Item Id: @i.Id</p>
     <p>Item Name: @i.ItemName</p>
@@ -23,15 +25,16 @@
         Items = new List<CartItem>();
         StoreItems = new List<StoreItem>();
         Items = await apiService.GetCartItemAsync(session.SessionKey);
-        if(Items is not null)
+        if (Items is not null)
         {
             var itemIds = new List<int>();
-            foreach(var item in Items)
+            foreach (var item in Items)
             {
                 itemIds.Add(item.ItemId);
             }
             var storeItems = await apiService.GetStoreItemsAsync();
             StoreItems = storeItems.Value.Where(i => itemIds.Contains(i.Id));
+            
             StateHasChanged();
         }
     }
@@ -39,5 +42,10 @@
     private int ReturnQuantity(int ItemId)
     {
         return Items.First(p => p.ItemId == ItemId).Quantity;
+    }
+
+    private void delete(int id)
+    {
+        NavManager.NavigateTo("/");
     }
 }
