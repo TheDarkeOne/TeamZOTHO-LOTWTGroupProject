@@ -13,6 +13,7 @@
     <p>Item Id: @i.Id</p>
     <p>Item Name: @i.ItemName</p>
     <p>Quantity: @ReturnQuantity(i.Id)</p>
+    <button @onclick="() => delete(ReturnCartId(i.Id))">Remove</button>
 }
 
 
@@ -34,7 +35,7 @@
             }
             var storeItems = await apiService.GetStoreItemsAsync();
             StoreItems = storeItems.Value.Where(i => itemIds.Contains(i.Id));
-            
+
             StateHasChanged();
         }
     }
@@ -44,8 +45,14 @@
         return Items.First(p => p.ItemId == ItemId).Quantity;
     }
 
-    private void delete(int id)
+    private int ReturnCartId(int ItemId)
     {
+        return Items.First(p => p.ItemId == ItemId && p.SessionKey == session.SessionKey).Id;
+    }
+
+    private async void delete(int id)
+    {
+        await apiService.DeleteCartItem(id);
         NavManager.NavigateTo("/");
     }
 }

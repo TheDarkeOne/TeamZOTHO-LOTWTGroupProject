@@ -83,9 +83,9 @@ namespace TeamZ.Web
             await client.PostAsJsonAsync("api/Cart", cartItem);
         }
 
-        public async Task DeleteCartItems(string sessionKey)
+        public async Task DeleteCartItem(int id)
         {
-            await client.DeleteAsync($"api/Cart/DeleteCartItemBySession/{sessionKey}");
+            await client.DeleteAsync($"api/Cart/{id}");
         }
 
         public async Task<IEnumerable<CartItem>> GetCartItemAsync(string SessionKey)

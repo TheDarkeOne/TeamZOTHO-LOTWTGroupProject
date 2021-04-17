@@ -38,7 +38,7 @@
     {
         try
         {
-            await apiService.DeleteCartItems(session.SessionKey);
+            ClearCart();
             await apiService.PostLogOut(session.LoggedInUser, session.SessionKey);
             session.LogOutUser();
             NavManager.NavigateTo("/", forceLoad:true);
@@ -52,5 +52,14 @@
     public void Dispose()
     {
         session.OnChange -= StateHasChanged;
+    }
+
+    public async void ClearCart()
+    {
+        var Items = await apiService.GetCartItemAsync(session.SessionKey);
+        foreach (var item in Items)
+        {
+            await apiService.DeleteCartItem(item.Id);
+        }
     }
 }

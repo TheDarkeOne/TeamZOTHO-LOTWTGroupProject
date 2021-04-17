@@ -33,10 +33,10 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
             return await _context.CartItems.Where(i=> i.SessionKey == SessionKey).ToListAsync();
         }
 
-        // GET: api/CartItems
         [HttpGet("[action]")]
-        public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItems()
+        public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItemList()
         {
+
             return await _context.CartItems.ToListAsync();
         }
 
@@ -92,24 +92,6 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
 
             _context.CartItems.Remove(cartItem);
             await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        [HttpDelete("[action]/{sessionKey}")]
-        public async Task<IActionResult> DeleteCartItemBySession(string sessionKey)
-        {
-            var cartItems = await _context.CartItems.Where(u => u.SessionKey == sessionKey).ToListAsync();
-            if (cartItems == null)
-            {
-                return NotFound();
-            }
-
-            foreach (var item in cartItems) 
-            { 
-                _context.CartItems.Remove(item);
-                await _context.SaveChangesAsync();
-            }
 
             return NoContent();
         }
