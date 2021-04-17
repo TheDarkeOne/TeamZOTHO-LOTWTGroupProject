@@ -77,7 +77,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddItem(AddObjectAttributes newItem)
         {
-            var logged = await TryLogMessage("IDataService", "Info", newItem.Name, "AddItem");
+            var logged = await TryLogMessage("IDataService", "Info", validateClass.ToSanitizedString(newItem.Name), "AddItem");
             if (logged)
             {
                 if (dataService.StoreUsers.Any(u => u.Username == newItem.Username))

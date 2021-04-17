@@ -1,5 +1,7 @@
 ﻿@using Microsoft.Extensions.Configuration
+@inject SessionService session
 @inject IConfiguration Configuration
+@implements IDisposable
 @{
     string constructACroc = Configuration["ConstructACroc"];
 }
@@ -19,20 +21,32 @@
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="createuser">
-                <span class="oi oi-account-login" aria-hidden="true"></span> Register
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
             <NavLink class="nav-link" href="login">
                 <span class="oi oi-account-login" aria-hidden="true"></span> Login
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="createstoreitem">
-                <span class="oi oi-plus" aria-hidden="true"></span> Add Item To Store
+            <NavLink class="nav-link" href="createuser">
+                <span class="oi oi-account-login" aria-hidden="true"></span> Register
             </NavLink>
         </li>
+        @if (session.LoggedInUser is not null)
+        {
+         <li class="nav-item px-3">
+            <NavLink class="nav-link" href="cart">
+                <span class="oi oi-account-login" aria-hidden="true"></span> Cart
+            </NavLink>
+         </li>
+        }
+        @if (session.IsAdmin)
+        {
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="createstoreitem">
+                    <span class="oi oi-plus" aria-hidden="true"></span> Add Item To Store
+                </NavLink>
+            </li>
+        }
+
         @if (Boolean.Parse(constructACroc))
         {
             <li class="nav-item px-3">
@@ -58,8 +72,18 @@
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    protected override void OnInitialized()
+    {
+        session.OnChange += StateHasChanged;
+    }
+
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    public void Dispose()
+    {
+        session.OnChange -= StateHasChanged;
     }
 }

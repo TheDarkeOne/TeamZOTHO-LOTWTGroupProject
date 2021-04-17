@@ -32,13 +32,11 @@ namespace TeamZ.Shared
         //private bool set;
         private string value;
 
-        public String Value
+        public string Value
         {
             get { return value; }
             set
             {
-                //if (set) throw new AlreadySetException(value);
-                //set = true;
                 this.value = value;
             }
         }

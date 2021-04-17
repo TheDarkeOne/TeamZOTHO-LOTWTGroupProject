@@ -16,5 +16,8 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Service
         public DbSet<StoreTransaction> Transactions { get; set; }
         public DbSet<StoreUser> Users { get; set; }
         public DbSet<LogMessage> LogMessages { get; set; }
+
+        public DbSet<CartItem> CartItems { get; set; }
+
     }
 }

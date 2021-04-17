@@ -3,7 +3,7 @@ version: '3.4'
 services:
   database:
     image: postgres
-    container_name: database
+    container_name: z-database
     environment: 
       - POSTGRES_USER=teamz
       - POSTGRES_PASSWORD=teamz
@@ -18,7 +18,7 @@ services:
       - 5432
 
   teamz:
-    image: clbmrls014/team-z:api
+    image: clbmrls014/teamz:v5
     ports:
       - 8080:80
     environment:
@@ -27,7 +27,7 @@ services:
       - database
 
   teamz.web:
-    image: clbmrls014/team-z:web
+    image: clbmrls014/teamzweb:v5
     ports:
       - 5000:80
     environment:

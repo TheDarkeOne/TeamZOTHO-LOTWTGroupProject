@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TeamZ.Shared;
 using TeamZ.Web.FormModels;
+using System.Web;
 
 namespace TeamZ.Web
 {
@@ -46,7 +48,7 @@ namespace TeamZ.Web
             await client.PostAsJsonAsync("api/storeitem/constructacroc", croc);
         }
 
-        public async Task PostAddItemAsync(string user, string key, bool admin, string name, decimal price, string description)
+        public async Task PostAddItemAsync(string user, string key, string name, decimal price, string description, bool admin = false)
         {
             var item = new
             {
@@ -59,6 +61,38 @@ namespace TeamZ.Web
             if (admin)
             {
                 await client.PostAsJsonAsync("api/storeitem/additem", item);
+            }
+        }
+
+        public async Task PostCreateUserAsync(string user, string key, string newUser, string newPassword, bool admin = false)
+        {
+            var u = new
+            {
+                Username = user,
+                SessionKey = key,
+                Name = newUser,
+                Password = newPassword,
+                IsAdmin = admin,
+            };
+            await client.PostAsJsonAsync("api/user/createuser", u);
+        }
+
+        public async Task AddItemToCart(StoreItem item, string sessionId, int qty = 1)
+        {
+            var cartItem = new CartItem() { Quantity = qty, SessionKey = sessionId, ItemId = item.Id };
+            await client.PostAsJsonAsync("api/Cart", cartItem);
+        }
+
+        public async Task<IEnumerable<CartItem>> GetCartItemAsync(string SessionKey)
+        {
+            var encodedSessionKey = HttpUtility.UrlEncode(SessionKey);
+            try
+            {
+                var result = await client.GetFromJsonAsync<IEnumerable<CartItem>>($"api/Cart/?SessionKey={encodedSessionKey}");
+                return result;
+            } catch (Exception e)
+            {
+                return null;
             }
         }
 
@@ -95,29 +129,6 @@ namespace TeamZ.Web
                 SessionKey = key,
             };
             await client.PostAsJsonAsync("api/user/logoutuser", credentials);
-        }
-
-        public async Task<bool> PostCreateUserAsync(string user, string pass)
-        {
-            var newUser = new
-            {
-                Username = user,
-                Password = pass
-            };
-            var result = await client.PostAsJsonAsync("api/user/createuser", newUser);
-            return result.IsSuccessStatusCode;
-        }
-
-        public async Task<bool> PostCreateItemAsync(string name, decimal price, string description)
-        {
-            var newItem = new 
-            {
-                ItemName = name,
-                Price = price,
-                Description = description
-            };
-            var result = await client.PostAsJsonAsync("api/storeitem/additem", newItem);
-            return result.IsSuccessStatusCode;
         }
 
         public async Task<bool> PostCheckAdminStatus(string user, string key)

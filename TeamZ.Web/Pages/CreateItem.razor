@@ -1,5 +1,7 @@
 ﻿@inject TeamZ.Web.APIService apiService
 @inject NavigationManager NavManager
+@inject SessionService session
+@implements IDisposable
 @using TeamZ.Web.FormModels
 @page "/createstoreitem"
 
@@ -36,11 +38,17 @@
     private ItemModel itemModel = new ItemModel();
     private bool createFailed = false;
 
+    protected override void OnInitialized()
+    {
+        session.OnChange += StateHasChanged;
+    }
+
     private async void Submit()
     {
         try
         {
-            createFailed = await apiService.PostCreateItemAsync(itemModel.ItemName, itemModel.Price, itemModel.Description);
+            await apiService.PostAddItemAsync(session.LoggedInUser, session.SessionKey,
+                itemModel.ItemName, itemModel.Price, itemModel.Description, session.IsAdmin);
         }
         catch (Exception e)
         {
@@ -52,5 +60,10 @@
         {
             NavManager.NavigateTo("/");
         }
+    }
+
+    public void Dispose()
+    {
+        session.OnChange -= StateHasChanged;
     }
 }

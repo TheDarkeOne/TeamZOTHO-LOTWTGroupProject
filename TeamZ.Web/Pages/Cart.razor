@@ -1,0 +1,43 @@
+﻿@page "/cart"
+@inject APIService apiService
+@inject SessionService session
+@using TeamZ.Shared;
+@using System.Linq; 
+
+<h3>Cart</h3>
+
+@foreach(var i in StoreItems)
+{
+    <p>Item Id: @i.Id</p>
+    <p>Item Name: @i.ItemName</p>
+    <p>Quantity: @ReturnQuantity(i.Id)</p>
+}
+
+
+@code{
+    public IEnumerable<CartItem> Items { get; set; }
+    public IEnumerable<StoreItem> StoreItems { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        session.OnChange += StateHasChanged;
+        Items = new List<CartItem>();
+        StoreItems = new List<StoreItem>();
+        Items = await apiService.GetCartItemAsync(session.SessionKey);
+        if(Items is not null)
+        {
+            var itemIds = new List<int>();
+            foreach(var item in Items)
+            {
+                itemIds.Add(item.ItemId);
+            }
+            var storeItems = await apiService.GetStoreItemsAsync();
+            StoreItems = storeItems.Value.Where(i => itemIds.Contains(i.Id));
+            StateHasChanged();
+        }
+    }
+
+    private int ReturnQuantity(int ItemId)
+    {
+        return Items.First(p => p.ItemId == ItemId).Quantity;
+    }
+}

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Services;
@@ -9,9 +10,10 @@ using TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Services;
 namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210416200758_sessionIdToSessionKeyAwesome")]
+    partial class sessionIdToSessionKeyAwesome
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,6 +53,8 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Migrati
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("CartItems");
                 });
@@ -181,6 +185,17 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Migrati
                         .HasForeignKey("StoreItemsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TeamZ.Shared.CartItem", b =>
+                {
+                    b.HasOne("TeamZ.Shared.StoreItem", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("TeamZ.Shared.StoreTransaction", b =>

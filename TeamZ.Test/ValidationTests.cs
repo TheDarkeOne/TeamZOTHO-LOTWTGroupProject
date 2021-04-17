@@ -136,6 +136,42 @@ namespace TeamZ.Test
 
         }
 
+        [Test]
+        public void UsernameExtremeTesting()
+        {
+            var shortUserName = "a";
+            validation.ValidateUsername(shortUserName).Should().BeFalse();
+
+            var longUserName = "ZTCERGRA9nIQWrvvM6rK3diZq" +
+                "kqecgTNtpoclel4TnVQdoCV8rpLWa" +
+                "gOEOEAYbiTf9QSimMJ5JD4Ztfu5H6rK" +
+                "gPXBEklhcGkmhRvulReCefrTXbNnKH" +
+                "UwyZjSCoprUwkCfuFtIsrwrZmeAUYKtM" +
+                "g7ZSXoklksZnCwXpTGvcDPklY3uPFa" +
+                "6LwVxGILSpwdBNMVQgQuAdEJCS57B" +
+                "HWLUit7P7FZJ7eXKFExConi5QTxyVC";
+
+            validation.ValidateUsername(longUserName).Should().BeFalse();
+        }
+
+        [Test]
+        public void PasswordExtremeTesting()
+        {
+            var shortPassword = "a";
+            validation.ValidatePassword(shortPassword).Should().BeFalse();
+
+            var longPassword = "ZTCERGRA9nIQWrvvM6rK3diZq" +
+                "kqecgTNtpoclel4TnVQdoCV8rpLWa" +
+                "gOEOEAYbiTf9QSimMJ5JD4Ztfu5H6rK" +
+                "gPXBEklhcGkmhRvulReCefrTXbNnKH" +
+                "UwyZjSCoprUwkCfuFtIsrwrZmeAUYKtM" +
+                "g7ZSXoklksZnCwXpTGvcDPklY3uPFa" +
+                "6LwVxGILSpwdBNMVQgQuAdEJCS57B" +
+                "HWLUit7P7FZJ7eXKFExConi5QTxyVC";
+
+            validation.ValidatePassword(longPassword).Should().BeFalse();
+        }
+
 
     }
 }
