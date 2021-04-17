@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TeamZ.Shared;
 using TeamZ.Web.FormModels;
+using System.Web;
 
 namespace TeamZ.Web
 {
@@ -73,6 +75,25 @@ namespace TeamZ.Web
                 IsAdmin = admin,
             };
             await client.PostAsJsonAsync("api/user/createuser", u);
+        }
+
+        public async Task AddItemToCart(StoreItem item, string sessionId, int qty = 1)
+        {
+            var cartItem = new CartItem() { Quantity = qty, SessionKey = sessionId, ItemId = item.Id };
+            await client.PostAsJsonAsync("api/Cart", cartItem);
+        }
+
+        public async Task<IEnumerable<CartItem>> GetCartItemAsync(string SessionKey)
+        {
+            var encodedSessionKey = HttpUtility.UrlEncode(SessionKey);
+            try
+            {
+                var result = await client.GetFromJsonAsync<IEnumerable<CartItem>>($"api/Cart/?SessionKey={encodedSessionKey}");
+                return result;
+            } catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public async Task<Result<StoreItem>> GetStoreItemById(int id)

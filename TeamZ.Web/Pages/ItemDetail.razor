@@ -1,12 +1,18 @@
 ﻿@page "/detail/{id:int}"
 @using TeamZ.Shared
 @inject APIService apiService
+@inject SessionService session
 @inject NavigationManager NavManager
 
 <h2>@storeItem.ItemName</h2>
 <h4>$@storeItem.Price USD</h4>
 
 <p>@storeItem.Description</p>
+
+@if(session.LoggedInUser is not null)
+{
+    <button @onclick="addToCart">Add To Cart</button>
+}
 
 @code {
     [Parameter]
@@ -16,6 +22,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        session.OnChange += StateHasChanged;
         storeItem = new StoreItem("", (decimal)0.00);
 
         var item = await apiService.GetStoreItemById(id);
@@ -25,5 +32,10 @@
         {
             NavManager.NavigateTo("/notfound");
         }
+    }
+
+    private async void addToCart()
+    {
+        await apiService.AddItemToCart(storeItem, session.SessionKey, 1);
     }
 }

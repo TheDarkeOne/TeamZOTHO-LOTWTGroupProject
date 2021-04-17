@@ -22,7 +22,7 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         }
 
         // GET: api/CartItems
-        [HttpGet("{SessionKey}")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItems(string SessionKey)
         {
             if(string.IsNullOrEmpty(SessionKey))
@@ -67,12 +67,10 @@ namespace TeamZealzamorpheoftheHoliestOrder_LordsoftheWesternTerritories.Control
         // POST: api/CartItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CartItem>> PostCartItem(CartItem cartItem)
+        public async Task PostCartItem(CartItem cartItem)
         {
             _context.CartItems.Add(cartItem);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCartItem", new { id = cartItem.Id }, cartItem);
         }
 
         // DELETE: api/CartItems/5
