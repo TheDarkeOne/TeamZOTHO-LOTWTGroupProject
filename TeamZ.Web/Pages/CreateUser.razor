@@ -5,39 +5,43 @@
 @using TeamZ.Web.FormModels
 @page "/createuser"
 
-<h1>Register User</h1>
-
-<EditForm Model="@userModel" OnValidSubmit="@Submit">
-    <DataAnnotationsValidator />
-    <label>
-        Username:
-    </label>
-    <p>
-        <InputText id="username" @bind-Value="userModel.Username" />
-    </p>
-    <label>
-        Password:
-    </label>
-    <p>
-        <InputText type="password" id="password" @bind-Value="userModel.Password" />
-    </p>
-    @if (session.IsAdmin)
-    {
-        <p>
+<div class="card">
+    <h1 class="card-header">Register User</h1>
+    <div class="card-body">
+        <EditForm Model="@userModel" OnValidSubmit="@Submit">
+            <DataAnnotationsValidator />
             <label>
-                Has Administrator privileges?
-                <InputCheckbox @bind-Value="userModel.IsAdmin" />
+                Username:
             </label>
-        </p>
-        
-    }
+            <p>
+                <InputText id="username" @bind-Value="userModel.Username" />
+            </p>
+            <label>
+                Password:
+            </label>
+            <p>
+                <InputText type="password" id="password" @bind-Value="userModel.Password" />
+            </p>
+            @if (session.IsAdmin)
+            {
+                <p>
+                    <label>
+                        Has Administrator privileges?
+                        <InputCheckbox @bind-Value="userModel.IsAdmin" />
+                    </label>
+                </p>
 
-    <button type="submit">Create User</button>
-</EditForm>
-@if (!createSucceeded)
-{
-    <p style="color: red">A problem happened when creating the user</p>
-}
+            }
+
+            <button type="submit">Create User</button>
+        </EditForm>
+        @if (!createSucceeded)
+        {
+            <p style="color: red">A problem happened when creating the user</p>
+        }
+    </div>
+</div>
+
 
 @code {
     private UserModel userModel = new UserModel();

@@ -9,33 +9,33 @@
 
 <EditForm Model="@crocModel" OnValidSubmit="@Submit">
     <DataAnnotationsValidator />
-    <p>
-        <label>
+    <p class="card">
+        <label class="card-body">
             Choose your Crocodile's Color!
             <InputText id="color" @bind-Value="crocModel.Color" />
         </label>
     </p>
-    <p>
-        <label>
+    <p class="card">
+        <label class="card-body">
             What does your Crocodile like to do?
             <InputText id="hobby" @bind-Value="crocModel.Hobby" />
         </label>
     </p>
     
-    <p>
-        <label>
+    <p class="card">
+        <label class="card-body">
             What kind of hat does your Crocodile where? (Leave this blank if they have no hat!)
             <InputText id="hat" @bind-Value="crocModel.Hat" />
         </label>
     </p>
-    <p>
-        <label>
+    <p class="card">
+        <label class="card-body">
             What color is your Crocodile's tail? (Leave this blank and it will match the Croc's color!)
             <InputText id="tail" @bind-Value="crocModel.Tail" />
         </label>
     </p>
-    <p>
-        <label>
+    <p class="card">
+        <label class="card-body">
             What is your Crocodile holding? (Leave this blank if they aren't holding anything!)
             <InputText id="item" @bind-Value="crocModel.HeldItem" />
         </label>

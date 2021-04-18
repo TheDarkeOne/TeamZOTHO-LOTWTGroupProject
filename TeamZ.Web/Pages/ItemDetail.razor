@@ -4,16 +4,21 @@
 @inject SessionService session
 @inject NavigationManager NavManager
 
-<h2>@storeItem.ItemName</h2>
-<h4>$@storeItem.Price USD</h4>
+<div class="card">
+    <h2 class="card-header">@storeItem.ItemName</h2>
+    <h4 class="card-header-pills">$@storeItem.Price.ToString("c2") USD</h4>
 
-<p>@storeItem.Description</p>
+    <div class="card-body">
+        <p>@storeItem.Description</p>
 
-@if(session.LoggedInUser is not null)
-{
-    <input type="number" @bind="CartAmount"/>
-    <button @onclick="addToCart">Add To Cart</button>
-}
+        @if (session.LoggedInUser is not null)
+        {
+            <input type="number" @bind="CartAmount" />
+            <button @onclick="addToCart">Add To Cart</button>
+        }
+    </div>
+</div>
+
 
 @code {
     [Parameter]

@@ -5,35 +5,40 @@
 @using TeamZ.Web.FormModels
 @page "/login"
 
-<h1>Login</h1>
-
-@if (session.LoggedInUser is null)
-{
-    <EditForm Model="@loginModel" OnValidSubmit="@Submit">
-        <DataAnnotationsValidator />
-        <label>
-            Username:
-        </label>
-        <p>
-            <InputText id="username" @bind-Value="loginModel.Username" />
-        </p>
-        <label>
-            Password:
-        </label>
-        <p>
-            <InputText type="password" id="password" @bind-Value="loginModel.Password" />
-        </p>
-        <button type="submit">Login</button>
-    </EditForm>
-    @if (!loginSuccess)
-    {
-        <p style="color: red">Unable to Authenticate</p>
-    }
-} else
-{
-    <p>You are already logged in as @session.LoggedInUser</p>
-    <p>You have been logged in for @session.CheckTimeLoggedOn() minutes</p>
-}
+<div class="card">
+    <h1 class="card-header">Login</h1>
+    <div class="card-body">
+        @if (session.LoggedInUser is null)
+        {
+            <EditForm Model="@loginModel" OnValidSubmit="@Submit">
+                <DataAnnotationsValidator />
+                <label>
+                    Username:
+                </label>
+                <p>
+                    <InputText id="username" @bind-Value="loginModel.Username" />
+                </p>
+                <label>
+                    Password:
+                </label>
+                <p>
+                    <InputText type="password" id="password" @bind-Value="loginModel.Password" />
+                </p>
+                <button type="submit">Login</button>
+            </EditForm>
+            @if (!loginSuccess)
+            {
+                <p style="color: red">Unable to Authenticate</p>
+            }
+        }
+        else
+        {
+            <p>You are already logged in as @session.LoggedInUser</p>
+            <p>You have been logged in for @session.CheckTimeLoggedOn() minutes</p>
+        }
+    </div>
+    
+</div>
 
 
 @code {
